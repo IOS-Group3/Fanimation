@@ -1,7 +1,4 @@
-Original App Design Project - README Template
-===
-
-# APP_NAME_HERE
+# Fanimation 
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -11,16 +8,15 @@ Original App Design Project - README Template
 
 ## Overview
 ### Description
-[Description of your app]
+Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social cataloging platform where users can organize and track personalized list of anime/manga titles they are completing, view their current progress, rate titles, and provide reviews for others to view.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Category:** Anime/Manga Social Cataloging
+- **Mobile:**  Fully Mobile to accomadate the target demongraphic
+- **Story: N/A**
+- **Market:** Manga and Anime enthusiast of any age group
+- **Habit:** Anime titles and manga volumes are released every season. This app will serve as a companion app during daily consumption.
+- **Scope:** Start with allowing user to add anime and manga titles to personalized collections. Provide a 1-10 rating system which is aggregated across the app.
 
 ## Product Spec
 
@@ -28,13 +24,23 @@ Original App Design Project - README Template
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Users are able to register an account
+* Users are able to login to their accounts
+* Users can view a stream of anime/manga titles
+* Selecting an anime/manga title displays a detailed view
+* Users can add anime/manga titles to personalized collections
+* Users can rate an anime title from 1 - 10
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Users can search for anime/manga titles
+* Users can write reviews to anime/manga titles
+* User reviews can be viewed by other users on the app
+* User ratings can be viewed by other users on the app
+* Users can view other users' collections
+* Users can privitize or publicize their collections
+* Users can upload profile photos
+* User can view trailers and previews of titles
 
 ### 2. Screen Archetypes
 
@@ -49,24 +55,31 @@ Original App Design Project - README Template
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
-* [fill out your third tab]
+* Home
+* MyList
+* Profile
 
-**Flow Navigation** (Screen to Screen)
+**Flow Navigation** (Screen to Screen) (Paola) 
 
-* [list first screen here]
-   * [list screen navigation here]
-   * ...
-* [list second screen here]
-   * [list screen navigation here]
-   * ...
+* Register Screen
+   * => Home Screen
+* Login Screen
+   * => Home Screen
+* Home Screen
+   * => View More Screen (once you select a anime)
+* MyList Screen
+   * => Rate Screen (once you select a anime)
+* View More Screen
+   * => Home Screen
+* Rate Screen
+   * => MyList Screen
+* Profile Screen
+   * => None
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/IOS-Group3/Fanimation/blob/main/readmeAssets/sketch.jpg" width=600>
 
-### [BONUS] Digital Wireframes & Mockups
+### [BONUS] Digital Wireframes & Mockups (TODO: Recleph)
 
 ### [BONUS] Interactive Prototype
 
@@ -75,6 +88,6 @@ Original App Design Project - README Template
 ### Models
 [Add table of models]
 ### Networking
-- [Add list of network requests by screen ]
+- [Add list of network requests by screen]
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
