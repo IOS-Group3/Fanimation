@@ -79,7 +79,11 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 ## Wireframes
 <img src="https://github.com/IOS-Group3/Fanimation/blob/main/readmeAssets/sketch.jpg" width=600>
 
-### [BONUS] Digital Wireframes & Mockups (TODO: Recleph)
+### [BONUS] Digital Wireframes & Mockups
+Credit to [Hrishikesh Nanda](https://www.behance.net/gallery/128891097/MyAnimeList-Mobile-app-UIUX) for allowing us to use his Mockup UI/UX design as a springing board for our project.
+
+<img src="https://i.imgur.com/46x4zun.png" width=600>
+<img src="https://i.imgur.com/lfaqTIt.png" width=600>
 
 ### [BONUS] Interactive Prototype
 
