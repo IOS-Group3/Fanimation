@@ -44,12 +44,30 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 
 ### 2. Screen Archetypes
 
-* [list first screen here]
-   * [list associated required story here]
-   * ...
-* [list second screen here]
-   * [list associated required story here]
-   * ...
+* Login Screen
+   * Users are able to login to their accounts
+* Registration Screen
+   * Users are able to register an account
+* Stream
+   * Users can view a stream of anime/manga titles
+   * Users can view other users' collections
+   * User can view trailers and previews of titles
+* Search
+   * Users can search for anime/manga titles
+   * Users can view other users' collections
+* Creation
+   * Users can rate an anime title from 1 - 10
+   * Users can write reviews to anime/manga titles
+* Detail
+   * Selecting an anime/manga title displays a detailed view
+* Profile
+   * Users can add anime/manga titles to personalized collections
+   * Users can upload profile photos
+   * User reviews can be viewed by other users on the app
+   * User ratings can be viewed by other users on the app
+* Settings 
+   * Users can privitize or publicize their collections
+
 
 ### 3. Navigation
 
