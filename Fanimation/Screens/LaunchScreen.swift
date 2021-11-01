@@ -16,7 +16,10 @@ struct LaunchScreen: View {
 		Group {
 			if showMainView {
 				if didSeeWelcomeScreen {
-					MainScreen()
+					// TODO: put back the Main Screen after you finish the Welcomescreen
+//					MainScreen()
+					WelcomeScreen()
+					
 				} else {
 					WelcomeScreen().onAppear{
 						UserDefaults.standard.set(true, forKey: "didSeeWelcomeScreen")
@@ -56,21 +59,19 @@ struct LaunchScreen: View {
 									Color("blue1"),
 									Color("blue1"),
 									
-								]), startPoint: .leading, endPoint: .trailing),
+								]),
+								startPoint: .leading, endPoint: .trailing),
 								style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
 							)
 							.frame(width: size.width / 1.5, height: size.width / 1.5)
 							.rotationEffect(.init(degrees: -200))
 							.offset(x : 75, y:220)
 					}
-					
 				}.onAppear {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 						withAnimation(.linear(duration: 1)) {
 							bowAnimation.toggle()
-							
 							DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-								
 								showMainView.toggle()
 							}
 						}

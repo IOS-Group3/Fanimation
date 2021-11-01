@@ -9,9 +9,6 @@ import SwiftUI
 
 @main
 struct FanimationApp: App {
-	init () {
-		
-	}
     var body: some Scene {
         WindowGroup {
 			LaunchScreen()
