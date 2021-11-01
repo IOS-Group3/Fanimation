@@ -11,7 +11,8 @@ import SwiftUI
 struct FanimationApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+			LaunchScreen()
         }
     }
 }
