@@ -11,13 +11,13 @@ struct LaunchScreen: View {
 	@State var showMainView: Bool = false
 	@State var bowAnimation: Bool = false
 	@State private var didSeeWelcomeScreen:Bool = UserDefaults.standard.bool(forKey: "didSeeWelcomeScreen")
-
+	
 	var body: some View {
 		Group {
 			if showMainView {
 				if didSeeWelcomeScreen {
 					// TODO: put back the Main Screen after you finish the Welcomescreen
-//					MainScreen()
+					//					MainScreen()
 					WelcomeScreen()
 					
 				} else {
@@ -60,7 +60,7 @@ struct LaunchScreen: View {
 									Color("blue1"),
 									
 								]),
-								startPoint: .leading, endPoint: .trailing),
+												startPoint: .leading, endPoint: .trailing),
 								style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
 							)
 							.frame(width: size.width / 1.5, height: size.width / 1.5)
@@ -83,7 +83,22 @@ struct LaunchScreen: View {
 }
 
 struct LaunchScreen_Previews: PreviewProvider {
+	
 	static var previews: some View {
+		let _ = [
+			"iPhone 13 Pro Max",
+			"iPhone 13",
+			"iPhone 13 mini",
+			"iPhone SE 2nd gen","iPhone SE",
+			"iPhone 11 Pro Max",
+			"iPhone 11 Pro",
+			"iPhone 11",
+			"iPhone 8 Plus",
+			"iPhone SE 1st gen",
+			"iPhone 4S"
+		]
 		LaunchScreen()
+			.previewDevice(PreviewDevice(rawValue:"iPhone 8 Plus"))
+			.previewDisplayName("iPhone 8 Plus")
 	}
 }
