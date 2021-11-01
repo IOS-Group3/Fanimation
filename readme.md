@@ -11,12 +11,12 @@
 Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social cataloging platform where users can organize and track personalized list of anime/manga titles they are completing, view their current progress, rate titles, and provide reviews for others to view.
 
 ### App Evaluation
-- **Category:** Anime/Manga Social Cataloging
+- **Category:** Entertainment | Anime/Manga Social Cataloging
 - **Mobile:**  Fully Mobile to accomadate the target demongraphic
-- **Story: N/A**
+- **Story:** Current implementation are mostly web based, and the mobile platforms that are available tend to be web ports with poor UI. This project provides a solution with relevant features for the growing mobile Anime/Manga consumers.
 - **Market:** Manga and Anime enthusiast of any age group
-- **Habit:** Anime titles and manga volumes are released every season. This app will serve as a companion app during daily consumption.
-- **Scope:** Start with allowing user to add anime and manga titles to personalized collections. Provide a 1-10 rating system which is aggregated across the app.
+- **Habit:** Anime titles and manga volumes are released every season. This app will serve as a companion app in daily consumption.
+- **Scope:** Start with allowing user to add anime and manga titles to personalized collections. Provide a 1-10 rating system which is aggregated across the app. We can then scale to allowing group creation or other social interaction/collaboration features.
 
 ## Product Spec
 
