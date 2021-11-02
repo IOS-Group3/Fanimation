@@ -70,6 +70,14 @@ struct LoginScreen: View {
 						.foregroundColor(Color("light"))
 				}
 				Spacer()
+				HStack{
+					Text("Don't have an account?").foregroundColor(Color("dark"))
+					NavigationLink(destination: SignupScreen()) {
+						Text("Signup now")
+					}
+				}
+				Spacer()
+				Spacer()
 				Spacer()
 			}.padding()
 				.navigationBarTitle(Text("Login"), displayMode: .large)
