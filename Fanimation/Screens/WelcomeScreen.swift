@@ -34,7 +34,6 @@ struct WelcomeScreen: View {
 	@State var isNavigationLinkHidden:Bool = true
 	var body: some View {
 		NavigationView {
-			
 			ZStack {
 				Color("blue1")
 					.ignoresSafeArea()
@@ -160,11 +159,6 @@ struct RoundedCorners: Shape {
 		return path
 	}
 }
-
-
-
-
-
 
 
 

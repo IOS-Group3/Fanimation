@@ -7,5 +7,8 @@
 		<key>UIColorName</key>
 		<string>blue1</string>
 	</dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	
 </dict>
 </plist>
