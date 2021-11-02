@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignupScreen: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-	@State private var userName:String = ""
+	@State private var email:String = ""
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
 	
@@ -25,7 +25,7 @@ struct SignupScreen: View {
 				
 				HStack {
 					Image(systemName: "envelope.fill")
-					TextField("Email", text: $userName)
+					TextField("Email", text: $email)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))

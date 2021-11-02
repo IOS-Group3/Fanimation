@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginScreen: View {
-	@State private var userName:String = ""
+	@State private var email:String = ""
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
 	
@@ -24,7 +24,7 @@ struct LoginScreen: View {
 				
 				HStack {
 					Image(systemName: "envelope.fill")
-					TextField("Email", text: $userName)
+					TextField("Email", text: $email)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
