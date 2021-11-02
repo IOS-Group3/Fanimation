@@ -30,77 +30,93 @@ struct WelcomeScreen: View {
 			"image3" : "welcome13"
 		]
 	]
-	@State var index = 0;
+	@State var index:Int = 0
+	@State var isNavigationLinkHidden:Bool = true
 	var body: some View {
-		ZStack {
-			Color("blue1")
-				.ignoresSafeArea()
-			GeometryReader { proxy in
-				let width = proxy.size.width
-				let height = proxy.size.height
-				VStack{ // main Vstack
-					Spacer()
-					VStack{ // For the grid
-						HStack{
-							Image(content[index]["image1"] ?? "welcome1")
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.frame(width: 150, height: height / 3.5)
-								.cornerRadius(15)
-							
-							Image(content[index]["image2"] ?? "welcome1")
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.frame(width: 150, height: height / 3.5)
-								.cornerRadius(15)
-						}
-//						Spacer()
-						Image(content[index]["image3"] ?? "welcome1")
-							.resizable()
-							.aspectRatio(contentMode: .fill)
-							.frame(width: 300, height: height / 4)
-							.cornerRadius(20)
-					} // end of the grid
-					Spacer()
-					VStack { // bottom card
-						Text(content[index]["title"]!)
-							.font(.largeTitle)
-							.foregroundColor(Color("dark"))
-							.frame(width: width, height: height / 10, alignment: .leading)
-							.fixedSize(horizontal: false, vertical: true)
-							.padding( .leading)
-						Text(content[index]["detail"]!)
-							.foregroundColor(Color("dark"))
-							.frame(width: width, height: height / 9, alignment: .leading)
-							.fixedSize(horizontal: false, vertical: true)
-							.padding(.leading)
-						
-						HStack {
-							ProgressView(value: Double(index) + 1, total: 3)
-								.progressViewStyle(LinearProgressViewStyle(tint: Color.blue))
-								.padding(.horizontal, 50)
-							
-							Button(action: {
-								if index >= content.count - 1{
-									
-								} else {
-									index += 1
-								}
-							}) {
-								Image(systemName: "arrow.right")
-							}.padding(.trailing)
-						}
-						.frame(width: width, height: height / 20, alignment: .center)
-						Spacer()
-					}
-					.frame(width: width, height: height / 3, alignment: .bottom)
-					.background(RoundedCorners(tl: 35, tr: 35, bl: 0, br: 0)
-									.fill(Color.white).edgesIgnoringSafeArea(.bottom))
-					
-				}
-			} // geom reader
+		NavigationView {
 			
+			ZStack {
+				Color("blue1")
+					.ignoresSafeArea()
+				GeometryReader { proxy in
+					let width = proxy.size.width
+					let height = proxy.size.height
+					VStack{ // main Vstack
+						Spacer()
+						VStack{ // For the grid
+							HStack{
+								Image(content[index]["image1"] ?? "welcome1")
+									.resizable()
+									.aspectRatio(contentMode: .fill)
+									.frame(width: 150, height: height / 3.5)
+									.cornerRadius(15)
+								
+								Image(content[index]["image2"] ?? "welcome1")
+									.resizable()
+									.aspectRatio(contentMode: .fill)
+									.frame(width: 150, height: height / 3.5)
+									.cornerRadius(15)
+							}
+							//						Spacer()
+							Image(content[index]["image3"] ?? "welcome1")
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: 300, height: height / 4)
+								.cornerRadius(20)
+						} // end of the grid
+						Spacer()
+						VStack { // bottom card
+							Text(content[index]["title"]!)
+								.font(.largeTitle)
+								.foregroundColor(Color("dark"))
+								.frame(width: width, height: height / 10, alignment: .leading)
+								.fixedSize(horizontal: false, vertical: true)
+								.padding( .leading)
+							Text(content[index]["detail"]!)
+								.foregroundColor(Color("dark"))
+								.frame(width: width, height: height / 9, alignment: .leading)
+								.fixedSize(horizontal: false, vertical: true)
+								.padding(.leading)
+							
+							HStack {
+								ProgressView(value: Double(index) + 1, total: 3)
+									.progressViewStyle(LinearProgressViewStyle(tint: Color.blue))
+									.padding(.horizontal, 50)
+								
+								if !isNavigationLinkHidden {
+									NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true)) {
+										Image(systemName: "arrow.right")
+									}.padding(.trailing)
+								} else {
+									Button(action: {
+										index += 1
+										if index >= content.count - 1{
+											isNavigationLinkHidden.toggle()
+										}
+									}) {
+										Image(systemName: "arrow.right")
+									}.padding(.trailing)
+								}
+
+							}
+							
+							.frame(width: width, height: height / 20, alignment: .center)
+							Spacer()
+						}
+						.frame(width: width, height: height / 3, alignment: .bottom)
+						.background(RoundedCorners(tl: 35, tr: 35, bl: 0, br: 0)
+										.fill(Color.white).edgesIgnoringSafeArea(.bottom))
+						
+					}
+				} // geom reader
+				
+			}
+			.navigationBarTitle("")
+			.navigationBarHidden(true)
+			.navigationBarBackButtonHidden(true)
 		}
+		
+		
 	}
 }
 
