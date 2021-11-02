@@ -24,8 +24,8 @@ struct SignupScreen: View {
 			VStack {
 				
 				HStack {
-					Image(systemName: "person.circle")
-					TextField("User Name", text: $userName)
+					Image(systemName: "envelope.fill")
+					TextField("Email", text: $userName)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
