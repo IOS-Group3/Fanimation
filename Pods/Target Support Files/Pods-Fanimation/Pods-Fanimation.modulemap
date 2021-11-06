@@ -1,6 +1,0 @@
-framework module Pods_Fanimation {
-  umbrella header "Pods-Fanimation-umbrella.h"
-
-  export *
-  module * { export * }
-}
