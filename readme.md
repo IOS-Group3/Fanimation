@@ -11,12 +11,12 @@
 Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social cataloging platform where users can organize and track personalized list of anime/manga titles they are completing, view their current progress, rate titles, and provide reviews for others to view.
 
 ### App Evaluation
-- **Category:** Entertainment | Anime/Manga Social Cataloging
+- **Category:** Anime/Manga Social Cataloging
 - **Mobile:**  Fully Mobile to accomadate the target demongraphic
-- **Story:** Current implementation are mostly web based, and the mobile platforms that are available tend to be web ports with poor UI. This project provides a solution with relevant features for the growing mobile Anime/Manga consumers.
+- **Story: N/A**
 - **Market:** Manga and Anime enthusiast of any age group
-- **Habit:** Anime titles and manga volumes are released every season. This app will serve as a companion app in daily consumption.
-- **Scope:** Start with allowing user to add anime and manga titles to personalized collections. Provide a 1-10 rating system which is aggregated across the app. We can then scale to allowing group creation or other social interaction/collaboration features.
+- **Habit:** Anime titles and manga volumes are released every season. This app will serve as a companion app during daily consumption.
+- **Scope:** Start with allowing user to add anime and manga titles to personalized collections. Provide a 1-10 rating system which is aggregated across the app.
 
 ## Product Spec
 
@@ -68,7 +68,6 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 * Settings 
    * Users can privitize or publicize their collections
 
-
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
@@ -77,7 +76,7 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 * MyList
 * Profile
 
-**Flow Navigation** (Screen to Screen) (Paola) 
+**Flow Navigation** (Screen to Screen) 
 
 * Register Screen
    * => Home Screen
@@ -97,19 +96,85 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 ## Wireframes
 <img src="https://github.com/IOS-Group3/Fanimation/blob/main/readmeAssets/sketch.jpg" width=600>
 
-### [BONUS] Digital Wireframes & Mockups
-Credit to [Hrishikesh Nanda](https://www.behance.net/gallery/128891097/MyAnimeList-Mobile-app-UIUX) for allowing us to use his Mockup UI/UX design as a springing board for our project.
-
-<img src="https://i.imgur.com/46x4zun.png" width=600>
-<img src="https://i.imgur.com/lfaqTIt.png" width=600>
+### [BONUS] Digital Wireframes & Mockups (TODO: Recleph)
 
 ### [BONUS] Interactive Prototype
 
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+
+**User**
+| Property | Type     | Description |
+| -------- | -------- | --------    |
+| ObjectId |String    | Unique string identifier for user        |
+| email  | String     | User's email to log in|
+|password  | String   | User's password to log in| 
+|profileImg| Reference| Reference to user's profile image|
+
+**Pending List**
+| Property | Type     | Description |
+|----------|----------|-------------|
+| ObjectId | String   |Unique string identifier for Ratings|
+|UserID    | String   |User who owns the list|
+|title     | String   |Title of Anime|
+
+
+**Watching List**
+| Property | Type     | Description |
+|----------|----------|-------------|
+| ObjectId | String   | Unique string identifier for Ratings|
+| userID   | String   | User who owns the list|
+| title    | String   | Title of Anime|
+| startDate| String   | Date user started|
+| progress | Int      | How close to finishing |
+| score    | Int      | User's rating of anime | 
+
+**Watched List**
+| Property | Type     | Description |
+|----------|----------|-------------|
+| ObjectId | String   | Unique string identifier for Ratings|
+| userID   | String   | User who owns the list|
+| title    | String   | Title of Anime|
+| startDate| String   | Date user started|
+| endDate  | String   | Date user finished|
+| score    | Int      | User's rating of anime |
+
+**Favorites List**
+| Property | Type     | Description |
+|----------|----------|-------------|
+| ObjectId | String   | Unique string identifier for Ratings|
+| userId   | String   | User who made the rating|
+| title    | String   | Title of Anime|
+| startDate| String   | Date user started (if applicable)|
+| endDate  | String   | Date user finished (if applicable)|
+| score    | Int      | User's rating of anime|
+
+
 ### Networking
 - [Add list of network requests by screen]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- * Home Screen
+   * Read/GET - Send a get request to Jikan REST API to get anime/manga titles based on new season, currently airing, and trending endpoints
+  
+* MyList Screen
+    * Watching:
+        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Watching collection where the userID (objectID) is equal to the current user
+    * Completed:
+        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Completed collection where the userID (objectID) is equal to the current user
+    * On Hold:
+        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Hold collection where the userID (objectID) is equal to the current user
+* View More Screen
+   * Read/GET - Send a get request to Jikan REST API to get anime/manga details based on the object's ID
+* Rate Screen
+   * Create/POST
+* Profile Screen
+    * Read/GET - Send a get request to 
+
+- Base URL: [https://api.jikan.moe/v3/season/year/season](https://api.jikan.moe/v3/season/year/season)
+
+HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /characters | get all characters
+    `GET`    | /characters/?name=name | return specific character by name
+    `GET`    | /houses   | get all houses
+    `GET`    | /houses/?name=name | return specific house by name
