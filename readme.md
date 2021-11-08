@@ -152,29 +152,42 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 
 
 ### Networking
-- [Add list of network requests by screen]
-- * Home Screen
+Network Requests by Screen:
+* Home Screen
    * Read/GET - Send a get request to Jikan REST API to get anime/manga titles based on new season, currently airing, and trending endpoints
   
 * MyList Screen
     * Watching:
-        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Watching collection where the userID (objectID) is equal to the current user
+        * Read/Get - Send a get request to the Firebase Database to get a list of all anime titles in Watching collection where the userID (objectID) is equal to the current user
     * Completed:
-        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Completed collection where the userID (objectID) is equal to the current user
+        * Read/Get - Send a get request to the Firebase Database to get a list of all anime titles in Completed collection where the userID (objectID) is equal to the current user
     * On Hold:
-        * Read/Get - Send a get request to the Firebase Database to pull get a list of all anime titles in Hold collection where the userID (objectID) is equal to the current user
+        * Read/Get - Send a get request to the Firebase Database to get a list of all anime titles in Hold collection where the userID (objectID) is equal to the current user
 * View More Screen
    * Read/GET - Send a get request to Jikan REST API to get anime/manga details based on the object's ID
 * Rate Screen
-   * Create/POST
+   * Create/POST - Send an update call to Firebase database and update the score of an anime title in the Score collection
 * Profile Screen
-    * Read/GET - Send a get request to 
+    * Read/GET - Send a get request to the Firebase Database to pull the user information based on current user ID.
 
-- Base URL: [https://api.jikan.moe/v3/season/year/season](https://api.jikan.moe/v3/season/year/season)
 
-HTTP Verb | Endpoint | Description
-   ----------|----------|------------
-    `GET`    | /characters | get all characters
-    `GET`    | /characters/?name=name | return specific character by name
-    `GET`    | /houses   | get all houses
-    `GET`    | /houses/?name=name | return specific house by name
+#### [OPTIONAL:] Existing API Endpoints
+
+- Base URL: [https://api.jikan.moe/v3](https://api.jikan.moe/v3)
+
+|HTTP Verb | Endpoint |Parameters | Description|
+|----------|----------|-----------|------------|
+|    `GET`    | /season/| [{season, year}]| Get all Anime titles from a specific year and season. Returns the current season if parameters are empty.|
+|    `GET`    | /season/archive  | None |Returns all years and their respective seasons that can be parsed.|
+|    `GET`    | /season/later| None | Returns all Anime that have been announced for the upcoming season|
+|    `GET`    | /anime  | [{id, request, pagnation}] |Returns a single anime object with all its details.|
+
+- Base URL: [https://api.jikan.moe/v3/anime/{id}{request}](https://api.jikan.moe/v3/anime/1)
+
+|HTTP Verb | Request |Parameters | Description|
+|----------|----------|-----------|------------|
+|    `GET`    | /| None| Anime with all it's details.|
+|    `GET`    | /characters_staff | None |List of character and staff members.|
+|    `GET`    | /videos| None | List of Promotional Videos & episodes (if any)|
+|    `GET`    | /episodes  | [Page Number (int)] |List of episodes.|
+|    `GET`    | /pictures  | None |List of related pictures.|
