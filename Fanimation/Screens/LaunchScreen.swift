@@ -17,8 +17,10 @@ struct LaunchScreen: View {
 			Group {
 				if showMainView {
 					if didSeeWelcomeScreen {
+						//Login or Main screen
 						NavigationView {
-							LoginScreen()
+							MainScreen()
+//							LoginScreen()
 								.navigationBarBackButtonHidden(true)
 						}
 						
@@ -28,6 +30,7 @@ struct LaunchScreen: View {
 						}
 					}
 				} else {
+					//launchScreen
 					ZStack {
 						Color("blue1").edgesIgnoringSafeArea(.all)
 						GeometryReader { proxy in
