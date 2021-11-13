@@ -15,7 +15,7 @@ struct MyListScreen: View {
 			Button("Logout") {
 				let firebaseAuth = Auth.auth()
 				do {
-					try! firebaseAuth.signOut()
+					try firebaseAuth.signOut()
 					onLogOut()
 				} catch let signOutError as NSError {
 					print("Error signing out: %@", signOutError)

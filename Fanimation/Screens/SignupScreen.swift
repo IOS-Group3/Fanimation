@@ -7,19 +7,19 @@
 
 import SwiftUI
 import Firebase
-
+import FirebaseAuth
 struct SignupScreen: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State private var email:String = ""
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
-    @State var errormessage:String = ""
-    
+	@State var errormessage:String = ""
+	
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
 	}
 	
-    var body: some View {
+	var body: some View {
 		ZStack {
 			Color("light")
 				.ignoresSafeArea()
@@ -53,20 +53,20 @@ struct SignupScreen: View {
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
 				.foregroundColor(Color("dark"))
 				.padding(10)
-                
+				
 				Spacer()
 				Button(action: {
-                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        //Signup successful
-                        if (error == nil) {
-                            let uid = Auth.auth().currentUser?.uid
-                            createAccount(email: email, uid: uid!)
-                            goMain()
-                        }
-                        else {//Failure
-                            errormessage = error!.localizedDescription
-                        }
-                    }
+					Auth.auth().createUser(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) { authResult, error in
+						//Signup successful
+						if (error == nil) {
+							let uid = Auth.auth().currentUser?.uid
+							createAccount(email: email, uid: uid!)
+							goMain()
+						}
+						else {//Failure
+							errormessage = error!.localizedDescription
+						}
+					}
 				}) {
 					
 					Text("Signup")
@@ -75,11 +75,11 @@ struct SignupScreen: View {
 						.background(Color("blue1"))
 						.cornerRadius(20)
 						.foregroundColor(Color("light"))
-                    
+					
 				}
-                //Error message
-                Text(errormessage).foregroundColor(.red)
-                
+				//Error message
+				Text(errormessage).foregroundColor(.red)
+				
 				Spacer()
 				HStack{
 					Text("Have an account?").foregroundColor(Color("dark"))
@@ -94,23 +94,23 @@ struct SignupScreen: View {
 			}.padding()
 				.navigationBarTitle(Text("Signup"), displayMode: .large)
 		}
-    }
+	}
 }
 
 
 func createAccount(email: String, uid: String) {
-    let db = Firestore.firestore()
-    var ref: DocumentReference? = nil
-    
-    //Add user
-    ref = db.collection("Users").document(email)
-    ref?.setData([
-        "userID": uid
-        ])
+	let db = Firestore.firestore()
+	var ref: DocumentReference? = nil
+	
+	//Add user
+	ref = db.collection("Users").document(email)
+	ref?.setData([
+		"userID": uid
+	])
 }
 
 struct SignupScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupScreen()
-    }
+	static var previews: some View {
+		SignupScreen()
+	}
 }

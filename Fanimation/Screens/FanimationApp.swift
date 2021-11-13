@@ -13,9 +13,14 @@ struct FanimationApp: App {
 	init () {
 		FirebaseApp.configure()
 	}
-    var body: some Scene {
-        WindowGroup {
-			LaunchScreen()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			NavigationView {
+				LaunchScreen()
+					.navigationBarTitle("")
+					.navigationBarHidden(true)
+					.navigationBarBackButtonHidden(true)
+			}
+		}
+	}
 }

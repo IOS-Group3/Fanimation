@@ -96,7 +96,7 @@ struct WelcomeScreen: View {
 										Image(systemName: "arrow.right")
 									}.padding(.trailing)
 								}
-
+								
 							}
 							
 							.frame(width: width, height: height / 20, alignment: .center)
@@ -114,8 +114,6 @@ struct WelcomeScreen: View {
 			.navigationBarHidden(true)
 			.navigationBarBackButtonHidden(true)
 		}
-		
-		
 	}
 }
 

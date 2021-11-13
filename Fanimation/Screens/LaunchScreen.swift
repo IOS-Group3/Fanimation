@@ -19,7 +19,7 @@ struct LaunchScreen: View {
 			if showMainView {
 				if didSeeWelcomeScreen {
 					//Login or Main screen
-					NavigationView {
+					NavigationView{
 						if Auth.auth().currentUser != nil {
 							MainScreen().navigationBarBackButtonHidden(true)
 						}
@@ -27,13 +27,7 @@ struct LaunchScreen: View {
 							LoginScreen()
 								.navigationBarBackButtonHidden(true)
 						}
-						
-						
-						MainScreen()
-						//							LoginScreen()
-							.navigationBarBackButtonHidden(true)
 					}
-					
 				} else {
 					WelcomeScreen().onAppear{
 						UserDefaults.standard.set(true, forKey: "didSeeWelcomeScreen")

@@ -13,7 +13,7 @@ struct MainScreen: View {
 		UITabBar.appearance().unselectedItemTintColor = UIColor.init(named: "light")
 		UITabBar.appearance().backgroundColor = .gray.withAlphaComponent(0.2)
 	}
-
+	
 	@State var selectedTabIndex = 0
 	
 	private let tabBarImageNames = ["house.fill", "square.grid.2x2", "person.fill"]
@@ -47,7 +47,7 @@ struct MainScreen: View {
 											.frame(width: 50, height: 50)
 											.background(selectedTabIndex == num ? Color(red: 156/255, green: 197/255, blue:250/255) : Color.white.opacity(1))
 											.cornerRadius(20)
-											 
+										
 										Text(tabBarText[num])
 											.foregroundColor(selectedTabIndex == num ? .init("blue1") : .init("blue3"))
 									}
@@ -63,7 +63,7 @@ struct MainScreen: View {
 			}
 			
 		}
-
+		
 	}
 }
 

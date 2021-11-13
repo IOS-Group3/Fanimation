@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C172F95273F9B8600B666D6 /* MainScreen.swift */; };
 		D89A1F412AB7AD78AB6D41F1 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */; };
 		E233CA5B2737226B00E1FEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */; };
 		E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA7273E1297008ACDC8 /* HomeScreen.swift */; };
@@ -247,7 +246,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */,
-				0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */,
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
 				E286FA3A27406F5100BCB562 /* MainScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,

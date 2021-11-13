@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ForgotPasswordScreen: View {
 	@State private var email:String = ""
+	@State private var errorMessage:String = ""
+	@State private var successMessage:String? = ""
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
 	}
-    var body: some View {
+	var body: some View {
 		ZStack{
 			Color("light")
 				.ignoresSafeArea()
@@ -33,12 +36,22 @@ struct ForgotPasswordScreen: View {
 				.foregroundColor(Color("dark"))
 				.padding(10)
 				
-				
-//				Spacer()
+				Text(errorMessage).foregroundColor(.red)
+				Text(successMessage ?? "").foregroundColor(.green)
 				Button(action: {
-					//TODO: add functionality to the forgot password button
+					errorMessage = ""
+					successMessage = ""
+					Auth.auth().sendPasswordReset(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines)){ error in
+						if (error == nil) {
+							errorMessage = ""
+							successMessage = "Reset Email Sent."
+						} else { //Error logging in
+							errorMessage = error!.localizedDescription
+							successMessage = ""
+						}
+						
+					}
 				}) {
-					
 					Text("Send Reset Email")
 						.padding()
 						.frame(width: 300, height: 50)
@@ -47,15 +60,15 @@ struct ForgotPasswordScreen: View {
 						.foregroundColor(Color("light"))
 				}
 				Spacer()
-				
 			}.padding()
 		}
-        
-    }
+		
+	}
 }
 
+
 struct ForgotPasswordScreen_Previews: PreviewProvider {
-    static var previews: some View {
+	static var previews: some View {
 		ForgotPasswordScreen()
-    }
+	}
 }
