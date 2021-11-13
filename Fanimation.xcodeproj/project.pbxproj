@@ -10,6 +10,10 @@
 		0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C172F95273F9B8600B666D6 /* MainScreen.swift */; };
 		D89A1F412AB7AD78AB6D41F1 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */; };
 		E233CA5B2737226B00E1FEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */; };
+		E246FAA6273E111D008ACDC8 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA5273E111D008ACDC8 /* MainScreen.swift */; };
+		E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA7273E1297008ACDC8 /* HomeScreen.swift */; };
+		E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */; };
+		E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */; };
 		E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A88F272F670100A8E343 /* LaunchScreen.swift */; };
 		E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */; };
 		E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A894272F863A00A8E343 /* LoginScreen.swift */; };
@@ -26,6 +30,10 @@
 		425881938A7E2F8A9B845853 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
 		C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fanimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E246FAA5273E111D008ACDC8 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		E246FAA7273E1297008ACDC8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreen.swift; sourceTree = "<group>"; };
+		E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		E2C0A88D272F632E00A8E343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2C0A88F272F670100A8E343 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -76,7 +84,14 @@
 				E2C0A88F272F670100A8E343 /* LaunchScreen.swift */,
 				E2C0A894272F863A00A8E343 /* LoginScreen.swift */,
 				E2C0A896272F864C00A8E343 /* SignupScreen.swift */,
+<<<<<<< HEAD
 				0C172F95273F9B8600B666D6 /* MainScreen.swift */,
+=======
+				E246FAA5273E111D008ACDC8 /* MainScreen.swift */,
+				E246FAA7273E1297008ACDC8 /* HomeScreen.swift */,
+				E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */,
+				E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */,
+>>>>>>> home
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -235,12 +250,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */,
+<<<<<<< HEAD
 				0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */,
+=======
+				E246FAA6273E111D008ACDC8 /* MainScreen.swift in Sources */,
+>>>>>>> home
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,
+				E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */,
 				E2E6F3272729F7B100709BDC /* FanimationApp.swift in Sources */,
 				E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */,
+				E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */,
 				E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */,
+				E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
