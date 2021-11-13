@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct LaunchScreen: View {
 	@State var showMainView: Bool = false
 	@State var bowAnimation: Bool = false
@@ -18,8 +18,15 @@ struct LaunchScreen: View {
 				if showMainView {
 					if didSeeWelcomeScreen {
 						NavigationView {
-							LoginScreen()
-								.navigationBarBackButtonHidden(true)
+                            if Auth.auth().currentUser != nil {
+                                MainScreen().navigationBarBackButtonHidden(true)
+                            }
+                            else {
+                                LoginScreen()
+                                    .navigationBarBackButtonHidden(true)
+                            }
+							
+                            
 						}
 						
 					} else {

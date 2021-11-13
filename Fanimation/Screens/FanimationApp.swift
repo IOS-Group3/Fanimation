@@ -10,7 +10,6 @@ import Firebase
 
 @main
 struct FanimationApp: App {
-	
 	init () {
 		FirebaseApp.configure()
 	}

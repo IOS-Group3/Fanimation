@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C172F95273F9B8600B666D6 /* MainScreen.swift */; };
 		D89A1F412AB7AD78AB6D41F1 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */; };
 		E233CA5B2737226B00E1FEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */; };
 		E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A88F272F670100A8E343 /* LaunchScreen.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C172F95273F9B8600B666D6 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		2010463F002EB2BFC1D11B6A /* Pods-Fanimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.debug.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.debug.xcconfig"; sourceTree = "<group>"; };
 		425881938A7E2F8A9B845853 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
 		C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fanimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,7 @@
 				E2C0A88F272F670100A8E343 /* LaunchScreen.swift */,
 				E2C0A894272F863A00A8E343 /* LoginScreen.swift */,
 				E2C0A896272F864C00A8E343 /* SignupScreen.swift */,
+				0C172F95273F9B8600B666D6 /* MainScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */,
+				0C172F96273F9B8600B666D6 /* MainScreen.swift in Sources */,
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,
 				E2E6F3272729F7B100709BDC /* FanimationApp.swift in Sources */,

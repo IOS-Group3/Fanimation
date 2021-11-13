@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginScreen: View {
 	@State private var email:String = ""
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
-	
+    @State var errorMessage:String = ""
+    
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
 	}
@@ -59,7 +61,16 @@ struct LoginScreen: View {
 				}
 				Spacer()
 				Button(action: {
-					//TODO: add functionality to the login button
+					//Signs in user
+                    Auth.auth().signIn(withEmail: email, password: password) {  authResult, error in
+                        if (error == nil) {
+                            //Sends user to the main screen
+                            goMain()
+                        } else { //Error logging in
+                            errorMessage = error!.localizedDescription
+                        }
+                      
+                    }
 				}) {
 					
 					Text("Login")
@@ -69,6 +80,9 @@ struct LoginScreen: View {
 						.cornerRadius(20)
 						.foregroundColor(Color("light"))
 				}
+                //Error message displayed
+                Text(errorMessage).foregroundColor(.red)
+                
 				Spacer()
 				HStack{
 					Text("Don't have an account?").foregroundColor(Color("dark"))
@@ -78,13 +92,17 @@ struct LoginScreen: View {
 				}
 				Spacer()
 				Spacer()
-				Spacer()
 			}.padding()
 				.navigationBarTitle(Text("Login"), displayMode: .large)
 		}
 	}
 }
-
+func goMain() {
+    if let window = UIApplication.shared.windows.first {
+        window.rootViewController = UIHostingController(rootView: MainScreen())
+        window.makeKeyAndVisible()
+    }
+}
 struct LoginScreen_Previews: PreviewProvider {
 	static var previews: some View {
 		LoginScreen()
