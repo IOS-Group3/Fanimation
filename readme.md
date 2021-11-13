@@ -24,12 +24,12 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 
 **Required Must-have Stories**
 
-* Users are able to register an account
-* Users are able to login to their accounts
-* Users can view a stream of anime/manga titles
-* Selecting an anime/manga title displays a detailed view
-* Users can add anime/manga titles to personalized collections
-* Users can rate an anime title from 1 - 10
+- [X] Users are able to register an account
+- [X] Users are able to login to their accounts
+- [ ] Users can view a stream of anime/manga titles
+- [ ] Selecting an anime/manga title displays a detailed view
+- [ ] Users can add anime/manga titles to personalized collections
+- [ ] Users can rate an anime title from 1 - 10
 
 **Optional Nice-to-have Stories**
 
