@@ -13,7 +13,7 @@ struct LoginScreen: View {
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
     @State var errorMessage:String = ""
-    
+
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
 	}
