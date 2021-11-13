@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 struct LaunchScreen: View {
 	@State var showMainView: Bool = false
 	@State var bowAnimation: Bool = false

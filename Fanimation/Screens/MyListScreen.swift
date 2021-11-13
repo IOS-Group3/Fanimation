@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 struct MyListScreen: View {
 	var body: some View {
 		VStack {
