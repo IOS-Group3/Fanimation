@@ -108,7 +108,6 @@ struct WelcomeScreen: View {
 						
 					}
 				} // geom reader
-				
 			}
 			.navigationBarTitle("")
 			.navigationBarHidden(true)

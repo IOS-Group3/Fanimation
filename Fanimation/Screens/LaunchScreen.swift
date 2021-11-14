@@ -14,17 +14,21 @@ struct LaunchScreen: View {
 	@State private var didSeeWelcomeScreen:Bool = UserDefaults.standard.bool(forKey: "didSeeWelcomeScreen")
 	
 	var body: some View {
-		
 		Group {
 			if showMainView {
 				if didSeeWelcomeScreen {
 					//Login or Main screen
 					NavigationView{
 						if Auth.auth().currentUser != nil {
-							MainScreen().navigationBarBackButtonHidden(true)
+							MainScreen()
+								.navigationBarTitle("")
+								.navigationBarHidden(true)
+								.navigationBarBackButtonHidden(true)
 						}
 						else {
 							LoginScreen()
+								.navigationBarTitle("")
+								.navigationBarHidden(true)
 								.navigationBarBackButtonHidden(true)
 						}
 					}
