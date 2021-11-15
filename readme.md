@@ -195,3 +195,8 @@ Network Requests by Screen:
 |    `GET`    | /videos| None | List of Promotional Videos & episodes (if any)|
 |    `GET`    | /episodes  | [Page Number (int)] |List of episodes.|
 |    `GET`    | /pictures  | None |List of related pictures.|
+
+## Build Progress
+**Milestone 1**
+
+<img src= 'https://i.imgur.com/kvMuZHk.gif' width= '250' title= 'Milestone 1'/>
