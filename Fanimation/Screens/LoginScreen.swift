@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Firebase
+//import Firebase
 import FirebaseAuth
 
 struct LoginScreen: View {

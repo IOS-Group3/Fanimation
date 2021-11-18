@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D89A1F412AB7AD78AB6D41F1 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */; };
+		5A692DC19714229A2B803F19 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F1952EDCD2C7FF616A2DDC /* Pods_Fanimation.framework */; };
 		E233CA5B2737226B00E1FEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */; };
 		E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA7273E1297008ACDC8 /* HomeScreen.swift */; };
 		E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */; };
@@ -25,9 +25,9 @@
 
 /* Begin PBXFileReference section */
 		0C172F95273F9B8600B666D6 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
-		2010463F002EB2BFC1D11B6A /* Pods-Fanimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.debug.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.debug.xcconfig"; sourceTree = "<group>"; };
-		425881938A7E2F8A9B845853 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
-		C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fanimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3737961C43918283C6457C1B /* Pods-Fanimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.debug.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.debug.xcconfig"; sourceTree = "<group>"; };
+		58B58BE9337315EB4222CF19 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
+		D0F1952EDCD2C7FF616A2DDC /* Pods_Fanimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fanimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E246FAA7273E1297008ACDC8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreen.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D89A1F412AB7AD78AB6D41F1 /* Pods_Fanimation.framework in Frameworks */,
+				5A692DC19714229A2B803F19 /* Pods_Fanimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,16 +60,16 @@
 		AD47815301EC8777A5837041 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2010463F002EB2BFC1D11B6A /* Pods-Fanimation.debug.xcconfig */,
-				425881938A7E2F8A9B845853 /* Pods-Fanimation.release.xcconfig */,
+				3737961C43918283C6457C1B /* Pods-Fanimation.debug.xcconfig */,
+				58B58BE9337315EB4222CF19 /* Pods-Fanimation.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C21C36501B08B3D9E8F34A4F /* Frameworks */ = {
+		BCFF2813F9D68DDEC0FA55B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C99971F3ABFCCD0EEB8EAA94 /* Pods_Fanimation.framework */,
+				D0F1952EDCD2C7FF616A2DDC /* Pods_Fanimation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 				E2E6F3252729F7B100709BDC /* Fanimation */,
 				E2E6F3242729F7B100709BDC /* Products */,
 				AD47815301EC8777A5837041 /* Pods */,
-				C21C36501B08B3D9E8F34A4F /* Frameworks */,
+				BCFF2813F9D68DDEC0FA55B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,11 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2E6F3312729F7B400709BDC /* Build configuration list for PBXNativeTarget "Fanimation" */;
 			buildPhases = (
-				13BA943A09D950611D512870 /* [CP] Check Pods Manifest.lock */,
+				E7D7A53C94AEF0DE6DE47BF1 /* [CP] Check Pods Manifest.lock */,
 				E2E6F31F2729F7B100709BDC /* Sources */,
 				E2E6F3202729F7B100709BDC /* Frameworks */,
 				E2E6F3212729F7B100709BDC /* Resources */,
-				D703FED603F077E71097547E /* [CP] Embed Pods Frameworks */,
+				4A72979844E516E7015ADC03 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,7 +199,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		13BA943A09D950611D512870 /* [CP] Check Pods Manifest.lock */ = {
+		4A72979844E516E7015ADC03 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7D7A53C94AEF0DE6DE47BF1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,23 +236,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D703FED603F077E71097547E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fanimation/Pods-Fanimation-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -379,7 +379,7 @@
 		};
 		E2E6F3322729F7B400709BDC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2010463F002EB2BFC1D11B6A /* Pods-Fanimation.debug.xcconfig */;
+			baseConfigurationReference = 3737961C43918283C6457C1B /* Pods-Fanimation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -410,7 +410,7 @@
 		};
 		E2E6F3332729F7B400709BDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 425881938A7E2F8A9B845853 /* Pods-Fanimation.release.xcconfig */;
+			baseConfigurationReference = 58B58BE9337315EB4222CF19 /* Pods-Fanimation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
