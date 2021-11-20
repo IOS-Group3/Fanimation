@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-
+//TODO: add the link
 var AnimeTitles: [AnimeTitleModel] = fetchAnimeTitles(link: "")
 func fetchAnimeTitles<T: Decodable>(link:String) -> T {
 	var data: Data = Data()
