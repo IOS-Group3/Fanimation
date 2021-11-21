@@ -131,6 +131,7 @@ struct HelloUser: View {
 struct AnimeCard: View {
 	var anime: AnimeTitleModel
 	var body: some View {
+		NavigationLink(destination: Text("More Anime")) {
 		ZStack{
 			AsyncImage(
 				url: URL(string: anime.imageUrl)!,
@@ -147,6 +148,7 @@ struct AnimeCard: View {
 		}
 		.frame(width: 150, height: 1000 / 3.5)
 		.cornerRadius(15)
+		}
 	}
 }
 

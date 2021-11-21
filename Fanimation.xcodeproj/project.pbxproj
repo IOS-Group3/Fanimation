@@ -12,6 +12,7 @@
 		E2018A7E274600DD00221640 /* AnimeTitleModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2018A7D274600DD00221640 /* AnimeTitleModelData.swift */; };
 		E2018A812746111200221640 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2018A802746111200221640 /* ImageLoader.swift */; };
 		E216A0BC27473328008DFF89 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216A0BB27473328008DFF89 /* UserModel.swift */; };
+		E22DB0C62749D5CB0032C1BA /* AnimeDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22DB0C52749D5CA0032C1BA /* AnimeDetailsScreen.swift */; };
 		E233CA5B2737226B00E1FEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */; };
 		E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA7273E1297008ACDC8 /* HomeScreen.swift */; };
 		E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */; };
@@ -36,6 +37,7 @@
 		E2018A7D274600DD00221640 /* AnimeTitleModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTitleModelData.swift; sourceTree = "<group>"; };
 		E2018A802746111200221640 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		E216A0BB27473328008DFF89 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		E22DB0C52749D5CA0032C1BA /* AnimeDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsScreen.swift; sourceTree = "<group>"; };
 		E233CA5A2737226B00E1FEEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E246FAA7273E1297008ACDC8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreen.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				E246FAA7273E1297008ACDC8 /* HomeScreen.swift */,
 				E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */,
 				E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */,
+				E22DB0C52749D5CA0032C1BA /* AnimeDetailsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */,
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
 				E286FA3A27406F5100BCB562 /* MainScreen.swift in Sources */,
+				E22DB0C62749D5CB0032C1BA /* AnimeDetailsScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,
 				E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */,
 				E2E6F3272729F7B100709BDC /* FanimationApp.swift in Sources */,
