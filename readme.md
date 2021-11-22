@@ -204,4 +204,4 @@ Network Requests by Screen:
 \
 **Milestone 2** 
 
-<img src= 'https://i.imgur.com/MHs5pK5.gif' width= '250' title= 'Milestone 2'/>
+<img src= 'https://i.imgur.com/V4D5JZL.gif' width= '250' title= 'Milestone 2'/>
