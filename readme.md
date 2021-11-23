@@ -26,7 +26,7 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 
 - [X] Users are able to register an account
 - [X] Users are able to login to their accounts
-- [ ] Users can view a stream of anime/manga titles
+- [X] Users can view a stream of anime/manga titles
 - [ ] Selecting an anime/manga title displays a detailed view
 - [ ] Users can add anime/manga titles to personalized collections
 - [ ] Users can rate an anime title from 1 - 10
@@ -200,3 +200,8 @@ Network Requests by Screen:
 **Milestone 1**
 
 <img src= 'https://i.imgur.com/kvMuZHk.gif' width= '250' title= 'Milestone 1'/>
+
+\
+**Milestone 2** 
+
+<img src= 'https://i.imgur.com/V4D5JZL.gif' width= '250' title= 'Milestone 2'/>
