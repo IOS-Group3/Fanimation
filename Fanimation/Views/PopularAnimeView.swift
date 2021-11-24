@@ -24,24 +24,31 @@ struct PopularAnimeView: View {
     }
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 20) {
-                ForEach(animelist, id: \.mal_id) { anime in
-                    //  the UI
-                    ZStack (alignment: .bottomTrailing){
-                        AsyncImage(
-                            url: URL(string: anime.image_url)!,
-                            placeholder: { LoadingCard() },
-                            image: {Image(uiImage: $0).resizable()}
-                        )
-                            .frame(width: 200, height: 300)
-                            .cornerRadius(15)
-                        VStack {
-                            Text(anime.title).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
-                        }.frame(width: 200, height: 300, alignment: .bottomLeading).cornerRadius(15)
+        VStack(alignment: .leading) {
+            Text("Popular")
+                .font(.headline)
+                .fontWeight(.bold)
+                .padding([.top, .leading])
+            
+            ScrollView(.horizontal) {
+                HStack(spacing: 20) {
+                    ForEach(animelist, id: \.mal_id) { anime in
+                        //  the UI
+                        ZStack (alignment: .bottomTrailing){
+                            AsyncImage(
+                                url: URL(string: anime.image_url)!,
+                                placeholder: { LoadingCard() },
+                                image: {Image(uiImage: $0).resizable()}
+                            )
+                                .frame(width: 200, height: 300)
+                                .cornerRadius(15)
+                            VStack {
+                                Text(anime.title).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
+                            }.frame(width: 200, height: 300, alignment: .bottomLeading).cornerRadius(15)
+                        }
                     }
                 }
-            }
+            }.padding(.horizontal)
         }.onAppear(perform: loadData)
     }
 }

@@ -11,6 +11,10 @@ struct Response: Codable {
     var top: [Anime]
 }
 
+struct Discover: Codable {
+    var results: [Anime]
+}
+
 struct Anime: Codable {
     var mal_id: Int
     var title: String
