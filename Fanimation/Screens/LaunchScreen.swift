@@ -27,8 +27,6 @@ struct LaunchScreen: View {
 						}
 						else {
 							LoginScreen()
-								.navigationBarTitle("")
-								.navigationBarHidden(true)
 								.navigationBarBackButtonHidden(true)
 						}
 					}
