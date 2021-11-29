@@ -28,8 +28,8 @@ Inspired by MyAnimeList, Fanimation is an anime and manga databasing and social 
 - [X] Users are able to login to their accounts
 - [X] Users can view a stream of anime/manga titles
 - [ ] Selecting an anime/manga title displays a detailed view
-- [ ] Users can add anime/manga titles to personalized collections
-- [ ] Users can rate an anime title from 1 - 10
+- [X] Users can add anime/manga titles to personalized collections
+- [X] Users can rate an anime title from 1 - 10
 
 **Optional Nice-to-have Stories**
 
@@ -111,8 +111,8 @@ Credit to [Hrishikesh Nanda](https://www.behance.net/gallery/128891097/MyAnimeLi
 **User**
 | Property | Type     | Description |
 | -------- | -------- | --------    |
-| ObjectId |String    | Unique string identifier for user        |
-| email  | String     | User's email to log in|
+| UserId   |String    | Unique string identifier for user        |
+| email    | String   | User's email to log in|
 |password  | String   | User's password to log in| 
 |profileImg| Reference| Reference to user's profile image|
 
@@ -128,17 +128,15 @@ Credit to [Hrishikesh Nanda](https://www.behance.net/gallery/128891097/MyAnimeLi
 | Property | Type     | Description |
 |----------|----------|-------------|
 | ObjectId | String   | Unique string identifier for Ratings|
-| userID   | String   | User who owns the list|
 | title    | String   | Title of Anime|
 | startDate| String   | Date user started|
 | progress | Int      | How close to finishing |
 | score    | Int      | User's rating of anime | 
 
-**Watched List**
+**Completed List**
 | Property | Type     | Description |
 |----------|----------|-------------|
 | ObjectId | String   | Unique string identifier for Ratings|
-| userID   | String   | User who owns the list|
 | title    | String   | Title of Anime|
 | startDate| String   | Date user started|
 | endDate  | String   | Date user finished|
@@ -148,7 +146,6 @@ Credit to [Hrishikesh Nanda](https://www.behance.net/gallery/128891097/MyAnimeLi
 | Property | Type     | Description |
 |----------|----------|-------------|
 | ObjectId | String   | Unique string identifier for Ratings|
-| userId   | String   | User who made the rating|
 | title    | String   | Title of Anime|
 | startDate| String   | Date user started (if applicable)|
 | endDate  | String   | Date user finished (if applicable)|
@@ -205,3 +202,8 @@ Network Requests by Screen:
 **Milestone 2** 
 
 <img src= 'https://i.imgur.com/V4D5JZL.gif' width= '250' title= 'Milestone 2'/>
+
+\
+**Milestone 3**
+
+<img src= 'https://i.imgur.com/yZTvqg1.gif' width= '250' title= 'Milestone 3'/>
