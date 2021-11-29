@@ -3,7 +3,7 @@
 //  Fanimation
 //
 //  Created by Ahmed  Elshetany  on 11/20/21.
-//
+//  Modified by Paola Jose on 11/26/21.
 
 //TODO: Add Styling
 
@@ -29,10 +29,49 @@ struct AnimeDetailsScreen: View {
 			Popularity(pop: anime.popularity)
 			Text(anime.description)
 				.multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-			
+            
+            Spacer()
+                .padding(/*@START_MENU_TOKEN@*/.top/*@END_MENU_TOKEN@*/)
 		}
-		.padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-		}
+        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        }.overlay(editButton(animeTitle: anime.name, animeId: anime.id))
+
+    }
+}
+
+struct editButton: View {
+    @State var editToggle:Bool = false
+    let  animeTitle:String
+    let  animeId:Int
+    
+    init(animeTitle:String, animeId:Int) {
+        self.animeTitle = animeTitle
+        self.animeId = animeId
+    }
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            if editToggle {
+                
+                EditListScreen(editToggle: self.$editToggle,animeTitle:animeTitle,animeId: animeId).padding(.top, 50).transition(.move(edge: .bottom))
+                
+            }
+            Spacer()
+            HStack {
+                    Spacer()
+                
+                    Button(action: {
+                        editToggle.toggle()
+                    }) {
+                        Image(systemName: "square.and.pencil")
+                            .font(.system(size: 25))
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(Color.white)
+                        .background(AngularGradient(gradient: Gradient(colors: [Color(red: 0.26, green: 0.632, blue: 0.981),Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.26, green: 0.632, blue: 0.981)]), center: .center).opacity(0.92)).clipShape(Circle())            }
+
+            }.padding(.trailing, 20.0)
+        }.background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle)
     }
 }
 

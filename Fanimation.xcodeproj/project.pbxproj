@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2816E12750A60B00F6F49F /* EditListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2816E02750A60B00F6F49F /* EditListScreen.swift */; };
+		0C34A9B1275448170016E5A5 /* CurrentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9B0275448170016E5A5 /* CurrentSettings.swift */; };
+		0C34A9B32754535E0016E5A5 /* PendingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9B22754535E0016E5A5 /* PendingListModel.swift */; };
+		0C34A9B5275456210016E5A5 /* WatchingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9B4275456210016E5A5 /* WatchingListModel.swift */; };
+		0C34A9B7275459020016E5A5 /* CompletedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9B6275459020016E5A5 /* CompletedListModel.swift */; };
+		0C34A9B927545AC30016E5A5 /* FavoritesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9B827545AC30016E5A5 /* FavoritesListModel.swift */; };
+		0C34A9BB27545BD80016E5A5 /* FirebaseRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9BA27545BD80016E5A5 /* FirebaseRequests.swift */; };
+		0C34A9BD2754D6770016E5A5 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34A9BC2754D6770016E5A5 /* MainScreen.swift */; };
 		5A692DC19714229A2B803F19 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F1952EDCD2C7FF616A2DDC /* Pods_Fanimation.framework */; };
 		831E5D3A274974EC00BA2ABD /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D39274974EC00BA2ABD /* Anime.swift */; };
 		831E5D3D2749770900BA2ABD /* CurrentlyAiringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D3C2749770900BA2ABD /* CurrentlyAiringView.swift */; };
@@ -26,7 +34,6 @@
 		E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA7273E1297008ACDC8 /* HomeScreen.swift */; };
 		E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */; };
 		E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */; };
-		E286FA3A27406F5100BCB562 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286FA3927406F5100BCB562 /* MainScreen.swift */; };
 		E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A88F272F670100A8E343 /* LaunchScreen.swift */; };
 		E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */; };
 		E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0A894272F863A00A8E343 /* LoginScreen.swift */; };
@@ -38,7 +45,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C172F95273F9B8600B666D6 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		0C2816E02750A60B00F6F49F /* EditListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListScreen.swift; sourceTree = "<group>"; };
+		0C34A9B0275448170016E5A5 /* CurrentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSettings.swift; sourceTree = "<group>"; };
+		0C34A9B22754535E0016E5A5 /* PendingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingListModel.swift; sourceTree = "<group>"; };
+		0C34A9B4275456210016E5A5 /* WatchingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingListModel.swift; sourceTree = "<group>"; };
+		0C34A9B6275459020016E5A5 /* CompletedListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedListModel.swift; sourceTree = "<group>"; };
+		0C34A9B827545AC30016E5A5 /* FavoritesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListModel.swift; sourceTree = "<group>"; };
+		0C34A9BA27545BD80016E5A5 /* FirebaseRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRequests.swift; sourceTree = "<group>"; };
+		0C34A9BC2754D6770016E5A5 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		3737961C43918283C6457C1B /* Pods-Fanimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.debug.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.debug.xcconfig"; sourceTree = "<group>"; };
 		58B58BE9337315EB4222CF19 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
 		831E5D39274974EC00BA2ABD /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
@@ -60,7 +74,6 @@
 		E246FAA7273E1297008ACDC8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreen.swift; sourceTree = "<group>"; };
 		E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
-		E286FA3927406F5100BCB562 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		E2C0A88D272F632E00A8E343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2C0A88F272F670100A8E343 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -110,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				831E5D412749823D00BA2ABD /* APIService.swift */,
+				0C34A9BA27545BD80016E5A5 /* FirebaseRequests.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -160,6 +174,11 @@
 			isa = PBXGroup;
 			children = (
 				E216A0BB27473328008DFF89 /* UserModel.swift */,
+				0C34A9B0275448170016E5A5 /* CurrentSettings.swift */,
+				0C34A9B22754535E0016E5A5 /* PendingListModel.swift */,
+				0C34A9B4275456210016E5A5 /* WatchingListModel.swift */,
+				0C34A9B6275459020016E5A5 /* CompletedListModel.swift */,
+				0C34A9B827545AC30016E5A5 /* FavoritesListModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -172,13 +191,13 @@
 				E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */,
 				E2C0A88F272F670100A8E343 /* LaunchScreen.swift */,
 				E2C0A894272F863A00A8E343 /* LoginScreen.swift */,
+				0C34A9BC2754D6770016E5A5 /* MainScreen.swift */,
 				E2C0A896272F864C00A8E343 /* SignupScreen.swift */,
-				0C172F95273F9B8600B666D6 /* MainScreen.swift */,
-				E286FA3927406F5100BCB562 /* MainScreen.swift */,
 				E246FAA7273E1297008ACDC8 /* HomeScreen.swift */,
 				E246FAA9273E12F4008ACDC8 /* MyListScreen.swift */,
 				E246FAAB273E1323008ACDC8 /* ProfileScreen.swift */,
 				E22DB0C52749D5CA0032C1BA /* AnimeDetailsScreen.swift */,
+				0C2816E02750A60B00F6F49F /* EditListScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -351,18 +370,25 @@
 				831E5D3F2749795600BA2ABD /* PopularAnimeView.swift in Sources */,
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
 				8375906C274D6E12007C7FA6 /* LoadingCard.swift in Sources */,
-				E286FA3A27406F5100BCB562 /* MainScreen.swift in Sources */,
+				0C2816E12750A60B00F6F49F /* EditListScreen.swift in Sources */,
+				0C34A9B5275456210016E5A5 /* WatchingListModel.swift in Sources */,
 				8375906E274D71E9007C7FA6 /* DiscoverAnimeView.swift in Sources */,
+				0C34A9B7275459020016E5A5 /* CompletedListModel.swift in Sources */,
 				E22DB0C62749D5CB0032C1BA /* AnimeDetailsScreen.swift in Sources */,
+				0C34A9BD2754D6770016E5A5 /* MainScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,
 				E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */,
 				E2E6F3272729F7B100709BDC /* FanimationApp.swift in Sources */,
+				0C34A9BB27545BD80016E5A5 /* FirebaseRequests.swift in Sources */,
+				0C34A9B927545AC30016E5A5 /* FavoritesListModel.swift in Sources */,
 				E2018A7E274600DD00221640 /* AnimeTitleModelData.swift in Sources */,
+				0C34A9B32754535E0016E5A5 /* PendingListModel.swift in Sources */,
 				E216A0BC27473328008DFF89 /* UserModel.swift in Sources */,
 				831E5D492749AFAC00BA2ABD /* ImageLoader.swift in Sources */,
 				8375906A274D524D007C7FA6 /* HelloUserView.swift in Sources */,
 				831E5D422749823D00BA2ABD /* APIService.swift in Sources */,
 				E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */,
+				0C34A9B1275448170016E5A5 /* CurrentSettings.swift in Sources */,
 				E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */,
 				E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */,
 				E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */,
