@@ -37,6 +37,7 @@ struct DiscoverAnimeView: View {
                     .padding(.top, 50)
             
                     TabView {
+                        
                         ForEach(animeList, id: \.mal_id) { anime in
                             ZStack {
                                 AsyncImage(
@@ -47,13 +48,16 @@ struct DiscoverAnimeView: View {
                         
                             }.frame(alignment: .bottomLeading)
                         }
-                    }.frame(width:400, height: 300).cornerRadius(15)
+                    
+                    }.frame(width:400, height: 300).cornerRadius(15).tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }.onAppear(perform: loadData)
     }
 }
 
 struct DiscoverAnimeView_Previews: PreviewProvider {
     static var previews: some View {
-        DiscoverAnimeView()
+        NavigationView {
+            DiscoverAnimeView()
+        }
     }
 }

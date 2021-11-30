@@ -9,30 +9,36 @@
 
 import SwiftUI
 
+func getBackground(anime: Anime) -> String {
+    return anime.synopsis!
+}
+
 struct AnimeDetailsScreen: View {
-	var anime: AnimeTitleModel
+	@State var anime: Anime
     var body: some View {
 		ScrollView{
-		VStack{
-			AsyncImage(
-				url: URL(string: anime.imageUrl)!,
-				placeholder: { LoadingCard() },
-				image: {
-					Image(uiImage: $0)
-						.resizable()
-				}
-			).frame(width: 200, height: 400)
+            GeometryReader { proxy in
+                let height = proxy.size.height
+                let width = proxy.size.width
+                VStack{
+                    AsyncImage(
+                        url: URL(string: anime.image_url)!,
+                        placeholder: { LoadingCard() },
+                        image: {
+                            Image(uiImage: $0)
+                                .resizable()
+                        }
+                    ).frame(width: width * 0.50, height: height * 40)
+                        .cornerRadius(15)
 			
-			Text(anime.name)
-			Rating(rating: anime.avgRating)
-			Rank(rank: anime.rank)
-			Popularity(pop: anime.popularity)
-			Text(anime.description)
-				.multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-			
-		}
-		.padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-		}
+                    Text(anime.title).font(Font.custom("Poppins-Semibold", size: 20))
+                    VStack(alignment: .leading) {
+                        Text("Description").padding(20).font(Font.custom("Poppins-Semibold", size: 18))
+                        Text(anime.synopsis!).multilineTextAlignment(.leading).frame(width: width * 0.80, height: height * 15).truncationMode(.tail).padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 20)).font(Font.custom("Poppins-Semibold", size: 14))
+                    }
+                }.padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            }
+        }
     }
 }
 
@@ -67,6 +73,6 @@ struct Popularity: View {
 
 struct AnimeDetailsScreen_Previews: PreviewProvider {
     static var previews: some View {
-		AnimeDetailsScreen(anime: AnimeTitleModel(id: 666, name: "Hunter X Hunter", description: "Hunter x Hunter is set in a world where Hunters exist to perform all manner of dangerous tasks like capturing criminals and bravely searching for lost treasures in uncharted territories. Twelve-year-old Gon Freecss is determined to become the best Hunter possible in hopes of finding his father, who was a Hunter himself and had long ago abandoned his young son. However, Gon soon realizes the path to achieving his goals is far more challenging than he could have ever imagined. Along the way to becoming an official Hunter, Gon befriends the lively doctor-in-training Leorio, vengeful Kurapika, and rebellious ex-assassin Killua. To attain their own goals and desires, together the four of them take the Hunter Exam, notorious for its low success rate and high probability of death. Throughout their journey, Gon and his friends embark on an adventure that puts them through many hardships and struggles. They will meet a plethora of monsters, creatures, and characters—all while learning what being a Hunter truly means.", imageUrl: "https://cdn.myanimelist.net/images/anime/11/33657l.jpg", rank: 44, popularity: 22, avgRating: 6.78))
+		AnimeDetailsScreen(anime: Anime())
     }
 }
