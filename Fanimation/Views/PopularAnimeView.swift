@@ -16,6 +16,7 @@ struct PopularAnimeView: View {
         service.fetchAnimeList(url: url) { result in
             switch result {
             case .success(let animelist):
+					print(animelist)
                 self.animelist = animelist
             case .failure(_):
                 print("Error invoking URL")
