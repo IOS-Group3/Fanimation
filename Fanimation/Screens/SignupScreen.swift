@@ -27,7 +27,7 @@ struct SignupScreen: View {
 				
 				HStack {
 					Image(systemName: "envelope.fill")
-					TextField("Email", text: $email)
+                    TextField("Email", text: $email).autocapitalization(.none)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
@@ -37,13 +37,13 @@ struct SignupScreen: View {
 				HStack {
 					Image(systemName: "lock.fill")
 					if showPassword {
-						TextField("Password", text: $password)
+                        TextField("Password", text: $password).autocapitalization(.none)
 						Image(systemName: "eye.fill").onTapGesture {
 							showPassword.toggle()
 						}
 						
 					} else {
-						SecureField("Password", text: $password)
+                        SecureField("Password", text: $password)
 						Image(systemName: "eye.slash.fill").onTapGesture {
 							showPassword.toggle()
 						}
@@ -55,6 +55,8 @@ struct SignupScreen: View {
 				.padding(10)
 				
 				Spacer()
+                //Error message
+                Text(errormessage).foregroundColor(.red)
 				Button(action: {
 					Auth.auth().createUser(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) { authResult, error in
 						//Signup successful
@@ -77,8 +79,7 @@ struct SignupScreen: View {
 						.foregroundColor(Color("light"))
 					
 				}
-				//Error message
-				Text(errormessage).foregroundColor(.red)
+				
 				
 				Spacer()
 				HStack{

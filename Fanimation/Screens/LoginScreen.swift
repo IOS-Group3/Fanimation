@@ -27,7 +27,7 @@ struct LoginScreen: View {
 				
 				HStack {
 					Image(systemName: "envelope.fill")
-					TextField("Email", text: $email)
+                    TextField("Email", text: $email).autocapitalization(.none)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
@@ -37,7 +37,7 @@ struct LoginScreen: View {
 				HStack {
 					Image(systemName: "lock.fill")
 					if showPassword {
-						TextField("Password", text: $password)
+                        TextField("Password", text: $password).autocapitalization(.none)
 						Image(systemName: "eye.fill").onTapGesture {
 							showPassword.toggle()
 						}
@@ -61,6 +61,8 @@ struct LoginScreen: View {
 					}.padding(.trailing)
 				}
 				Spacer()
+                //Error message displayed
+                Text(errorMessage).foregroundColor(.red)
 				Button(action: {
 					//Signs in user
 					Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {  authResult, error in
@@ -81,8 +83,7 @@ struct LoginScreen: View {
 						.cornerRadius(20)
 						.foregroundColor(Color("light"))
 				}
-				//Error message displayed
-				Text(errorMessage).foregroundColor(.red)
+				
 				
 				Spacer()
 				HStack{

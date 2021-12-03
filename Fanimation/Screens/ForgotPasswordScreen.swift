@@ -23,7 +23,7 @@ struct ForgotPasswordScreen: View {
 				
 				HStack {
 					Image(systemName: "envelope.fill")
-					TextField("Email", text: $email)
+                    TextField("Email", text: $email).autocapitalization(.none)
 				}
 				.padding(.vertical, 10)
 				.overlay(Rectangle().frame(height: 2).padding(.top, 35))

@@ -9,6 +9,10 @@
 
 import SwiftUI
 
+func getBackground(anime: Anime) -> String {
+    return anime.synopsis!
+}
+
 struct AnimeDetailsScreen: View {
 	var anime: Anime
 	var body: some View {
@@ -32,7 +36,7 @@ struct AnimeDetailsScreen: View {
 					
 				}
 				Text("Description")
-				Text(anime.description)
+				Text(anime.synopsis ?? "")
 					.multilineTextAlignment(.leading)
 				Spacer()
 			}
@@ -82,6 +86,10 @@ struct Popularity: View {
 
 struct AnimeDetailsScreen_Previews: PreviewProvider {
 	static var previews: some View {
-		AnimeDetailsScreen(anime: Anime(mal_id: 666, title: "Hunter X Hunter", image_url: "https://cdn.myanimelist.net/images/anime/11/33657l.jpg", description: "Hunter x Hunter is set in a world where Hunters exist to perform all manner of dangerous tasks like capturing criminals and bravely searching for lost treasures in uncharted territories. Twelve-year-old Gon Freecss is determined to become the best Hunter possible in hopes of finding his father, who was a Hunter himself and had long ago abandoned his young son. However, Gon soon realizes the path to achieving his goals is far more challenging than he could have ever imagined. Along the way to becoming an official Hunter, Gon befriends the lively doctor-in-training Leorio, vengeful Kurapika, and rebellious ex-assassin Killua. To attain their own goals and desires, together the four of them take the Hunter Exam, notorious for its low success rate and high probability of death. Throughout their journey, Gon and his friends embark on an adventure that puts them through many hardships and struggles. They will meet a plethora of monsters, creatures, and characters—all while learning what being a Hunter truly means.", avgRating: 6.78, rank: 44, popularity: 22))
+		AnimeDetailsScreen(anime: Anime())
 	}
 }
+
+/*
+ AnimeDetailsScreen
+ */
