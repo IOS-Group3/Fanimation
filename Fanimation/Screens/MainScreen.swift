@@ -15,10 +15,6 @@ struct MainScreen: View {
 	}
 	
 	@State var selectedTabIndex = 0
-    @State var pendingList:[PendingList] = [PendingList()]
-    @State var watchingList:[WatchingList] = [WatchingList()]
-    @State var completedList:[CompletedList] = [CompletedList()]
-    @State var favoriteList:[Favoritelist] = [Favoritelist()]
     
 	private let tabBarImageNames = ["house.fill", "square.grid.2x2", "person.fill"]
 	private let tabBarText = ["Home", "My List", "Profile"]
