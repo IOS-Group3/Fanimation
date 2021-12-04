@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CompletedList {
+struct CompletedList: Codable {
     var animeId: Int
     var animeTitle: String
     var startDate: String
@@ -29,5 +29,13 @@ struct CompletedList {
         endDate = ""
         score = -1
         
+    }
+    
+    enum CodingKeys: CodingKey {
+        case animeId
+        case animeTitle
+        case startDate
+        case endDate
+        case score
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WatchingList {
+struct WatchingList: Codable {
     var animeId:Int
     var animeTitle:String
     var startDate:String
@@ -29,4 +29,25 @@ struct WatchingList {
         progress = -1
         score = -1
     }
+    
+    enum CodingKeys: CodingKey {
+        case animeId
+        case animeTitle
+        case startDate
+        case progress
+        case score
+    }
+    
+    /*func searchAnime(watching: [WatchingList]) -> (WatchingList) {
+        if watching.contains(where: {$0.animeId == animeId}) {
+            //get item
+            if let item = watching.first(where: {$0.animeId == animeId}) {
+                return item
+            }
+            else {
+                return WatchingList()
+            }
+        }
+        return WatchingList()
+    }*/
 }

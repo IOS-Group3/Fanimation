@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PendingList {
+struct PendingList: Codable, Hashable {
     var animeId: Int
     var animeTitle:String
     
@@ -16,8 +16,15 @@ struct PendingList {
         self.animeTitle = animeTitle
     }
     
+    enum CodingKeys: CodingKey {
+        case animeTitle
+        case animeId
+    }
+    
     init() {
         animeId = -1
         animeTitle = ""
     }
+    
+        
 }

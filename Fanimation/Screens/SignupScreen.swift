@@ -104,7 +104,7 @@ func createAccount(email: String, uid: String) {
 	var ref: DocumentReference? = nil
 	
 	//Add user
-	ref = db.collection("Users").document(email)
+    ref = db.collection("Users").document(email.lowercased())
 	ref?.setData([
 		"userID": uid
 	])

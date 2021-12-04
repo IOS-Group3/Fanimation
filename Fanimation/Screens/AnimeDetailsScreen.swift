@@ -3,7 +3,7 @@
 //  Fanimation
 //
 //  Created by Ahmed  Elshetany  on 11/20/21.
-//  Modified by Paola Jose on 11/26/21.
+//  Modified by Paola Jose on 12/01/21.
 
 //TODO: Add Styling
 
@@ -54,7 +54,7 @@ struct editButton: View {
             Spacer()
             if editToggle {
                 
-                EditListScreen(editToggle: self.$editToggle,animeTitle:animeTitle,animeId: animeId).padding(.top, 50).transition(.move(edge: .bottom))
+                //EditListScreen(editToggle: self.$editToggle, currSettings: <#Binding<Settings>#>,animeTitle:animeTitle,animeId: animeId).padding(.top, 50).transition(.move(edge: .bottom))
                 
             }
             Spacer()

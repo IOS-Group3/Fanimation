@@ -17,21 +17,20 @@ struct EditListScreen: View {
     @State var progressButton: Int
     let animeTitle:String
     let animeId:Int
-    var currSettings: [Any]
+    var currSettings: Binding<Settings>
     
-    //TODO: Create a struct for the settings
-    init(editToggle: Binding<Bool>, animeTitle: String, animeId: Int, statusList:Int? = 1, isFavorited:Bool? = false, scoreButton:Int? = -1, progressButton:Int? = 0, isList:Int? = 0) {
-        self.animeTitle = animeTitle
-        self.animeId = animeId
+    init(editToggle: Binding<Bool>, currSettings:Binding<Settings>) {
+        self.animeTitle = currSettings.wrappedValue.animeTitle
+        self.animeId = currSettings.wrappedValue.animeId
         self.editToggle = editToggle
-        self.statusList = statusList!
-        self.isFavorited = isFavorited!
-        self.scoreButton = scoreButton!
-        self.progressButton = progressButton!
-        self.isList = isList!
-        currSettings = [statusList, progressButton, scoreButton, isList, isFavorited]
-        
+        self.statusList = currSettings.wrappedValue.statusList
+        self.isFavorited = currSettings.wrappedValue.isFavorited
+        self.scoreButton = currSettings.wrappedValue.scoreButton
+        self.progressButton = currSettings.wrappedValue.progressButton
+        self.isList = currSettings.wrappedValue.isList
+        self.currSettings = currSettings
     }
+    
     
         var body: some View {
             VStack {
@@ -53,49 +52,58 @@ struct EditListScreen: View {
                                     Spacer()
                         
                     Button(action: {
-                            /*
-                             if isRemoved & (statusList == currSettings[0])  {
-                                //RemoveAnime(animeId, statusList)
+                        let firebase = FirebaseRequests()
+                            //List has only been removed
+                             if isRemoved && (statusList == currSettings.wrappedValue.statusList)  {
+                                 firebase.DeleteAnime(animeId: animeId, list: statusList)
                              }
-                             else if(statusList != currSettings[0]) {
-                                //Remove Anime(animeId, statusList)
-                                //Add Anime(animeId, animeTitle, statusList, progrssButton, scoreButton)
-                                
+                            //Anime switched to another list
+                            else if(statusList != currSettings.wrappedValue.statusList) {
+                                firebase.DeleteAnime(animeId: animeId, list: statusList)
+                                //Watching List
+                                if statusList == 1 {
+                                    firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, startDate: "", progress: progressButton, score: scoreButton))
+                                }
+                                //Planning List
+                                else if statusList == 2  {
+                                    firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle))
+                                }
+                                //Completed List
+                                else if statusList == 3 {
+                                    firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, startDate: "", endDate: "", score: scoreButton))
+                                }
                              }
-                             else if(statusList == currSettings[0] & isList == currSettings[0]) {
-                                //Update Anime(animeId,animeTitle, statusList, progrssButton, scoreButton)
-                             }
-                             else if statusList == currSettings[0] {
-                                //Add Anime(animeId, animeTitle, statusList, progrssButton, scoreButton)
+                        //Add anime for the first time
+                        else if statusList == currSettings.wrappedValue.statusList{
+                            //Watching List
+                            if statusList == 1 {
+                                firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, startDate: "", progress: progressButton, score: scoreButton))
+                            }
+                            //Planning List
+                            else if statusList == 2  {
+                                firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle))
+                            }
+                            //Completed List
+                            else if statusList == 3 {
+                                firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, startDate: "", endDate: "", score: scoreButton))
+                            }
+                        }
+                             
+                        //Added/Removed to favorites
+                        if isFavorited != currSettings.wrappedValue.isFavorited {
+                            firebase.UpdateFavorites(add: isFavorited, favorites: FavoriteList(animeId: animeId, animeTitle: animeTitle, startDate: "", endDate: "", score: scoreButton))
                              }
                              
-                             //Added to favorites
-                             if(isFavorite != currSettings[4] {
-                                //UpdateFavorites(animeId, animeTitle)
-                             }
-                             
-                             //Refresh Lists. 
-                             We will need deletion, original list, new list, and favorites
-                             If user deleted list but list did not change
-                                Just delete
-                             If user deleted list and list did change
-                                Delete
-                                Add to new list
-                            
-                                If user did not delete
-                                If user did not delete but change list
-                                    Delete
-                                    Add to new list
-                                If user did not change list but changed score
-                                    Change score
-                                If user did not change list but changed progress
-                                    Change progress
-                                
-                                If user added to favorites
-                                    Add to favories
-                                If user remove from favorites
-                                    Remove from favorites
-                             */
+                        //Update current lists
+                        if isRemoved && statusList == currSettings.wrappedValue.statusList {
+                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle, statusList: statusList, isFavorited: isFavorited, scoreButton: scoreButton, progressButton: progressButton)
+                        }
+                        else {
+                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle)
+                        }
+                        
+                        
+                        //Exit
                         editToggle.wrappedValue.toggle()
                             }) {
                                 RoundedRectangle(cornerRadius: 5.0)
@@ -136,7 +144,7 @@ struct EditListScreen: View {
                 
                 HStack() {
                     Button(action: {
-                        isList = 0
+                        isList = -1
                     }) {
                         Image(systemName: "trash").foregroundColor(isList == statusList ? Color(red: 0.907, green: 0.344, blue: 0.344, opacity: 1.0) : Color.gray)
                         Text("Remove from list").font(Font.custom("Poppins-bold", size: 10)).foregroundColor(isList == statusList ? Color(red: 0.907, green: 0.344, blue: 0.344, opacity: 1.0): Color.gray)
