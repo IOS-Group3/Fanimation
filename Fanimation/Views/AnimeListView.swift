@@ -64,7 +64,7 @@ struct AnimeListView: View {
                                     Text(anime.title).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
                                 }.frame(width: 200, height: 300, alignment: .bottomLeading).cornerRadius(15)
                             }
-                        }
+						}
                     }
                 }
             }.padding(.horizontal)
