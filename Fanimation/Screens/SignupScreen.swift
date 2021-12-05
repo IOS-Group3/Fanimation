@@ -12,6 +12,7 @@ struct SignupScreen: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State private var email:String = ""
 	@State private var password:String = ""
+    @State private var username:String = ""
 	@State var showPassword:Bool = false
 	@State var errormessage:String = ""
 	
@@ -24,6 +25,15 @@ struct SignupScreen: View {
 			Color("light")
 				.ignoresSafeArea()
 			VStack {
+                
+                HStack {
+                    Image(systemName: "person.fill")
+                    TextField("Username", text: $username).autocapitalization(.none)
+                }
+                .padding(.vertical, 10)
+                .overlay(Rectangle().frame(height: 2).padding(.top, 35))
+                .foregroundColor(Color("dark"))
+                .padding(10)
 				
 				HStack {
 					Image(systemName: "envelope.fill")
@@ -58,17 +68,32 @@ struct SignupScreen: View {
                 //Error message
                 Text(errormessage).foregroundColor(.red)
 				Button(action: {
-					Auth.auth().createUser(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) { authResult, error in
-						//Signup successful
-						if (error == nil) {
-							let uid = Auth.auth().currentUser?.uid
-							createAccount(email: email, uid: uid!)
-							goMain()
-						}
-						else {//Failure
-							errormessage = error!.localizedDescription
-						}
-					}
+                    if username.count > 3 {
+                         checkUsername(username: username) { result in
+                            if result == true {
+                                errormessage = ""
+                                Auth.auth().createUser(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {authResult, error in
+                                    //Signup successful
+                                    if (error == nil) {
+                                        let uid = Auth.auth().currentUser?.uid
+                                        
+                                        createAccount(email: email, uid: uid!, username: username)
+                                        goMain()
+                                    }
+                                    else {//Failure
+                                        errormessage = error!.localizedDescription
+                                    }
+                                    
+                                }
+                            }
+                            else {
+                                errormessage = "Username is already taken. Please choose another."
+                            }
+                        }
+                    }
+                    else {
+                        errormessage = "Username must be greater than 3 characters."
+                    }
 				}) {
 					
 					Text("Signup")
@@ -91,23 +116,53 @@ struct SignupScreen: View {
 				}
 				Spacer()
 				Spacer()
-				Spacer()
 			}.padding()
 				.navigationBarTitle(Text("Signup"), displayMode: .large)
 		}
 	}
 }
 
+func checkUsername(username: String, completion: @escaping (Bool) -> ()) -> () {
+    let db = Firestore.firestore()
+    
+    db.collection("UsernameTaken").document(username.lowercased()).getDocument { DocumentSnapshot, error in
+            if error != nil {
+                print("Error: \(error?.localizedDescription)")
+                completion(false)
+            }
+            else {
+                if ((DocumentSnapshot?.exists) == true) {
+                    print("Username does exist!")
+                    completion(false)
+                }
+                else {
+                    print("Username does not exist!")
+                    completion(true)
+                }
+                
+            }
+        }
 
-func createAccount(email: String, uid: String) {
+}
+func createAccount(email: String, uid: String, username:String) {
 	let db = Firestore.firestore()
 	var ref: DocumentReference? = nil
 	
+    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+    changeRequest?.displayName = username
+    changeRequest?.commitChanges()
+    
 	//Add user
     ref = db.collection("Users").document(email.lowercased())
 	ref?.setData([
-		"userID": uid
+        "userID": uid,
+        "username": username
 	])
+    
+    //Add Username to list
+    db.collection("UsernameTaken").document(username.lowercased()).setData([:
+        
+    ])
 }
 
 struct SignupScreen_Previews: PreviewProvider {

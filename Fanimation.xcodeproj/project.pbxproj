@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CCE765F275C555400C4D7FD /* FirebaseRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE765E275C555400C4D7FD /* FirebaseRequests.swift */; };
+		0CCE7661275C558600C4D7FD /* PopularAnimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7660275C558600C4D7FD /* PopularAnimeView.swift */; };
+		0CCE7663275C55BE00C4D7FD /* CompletedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7662275C55BE00C4D7FD /* CompletedListModel.swift */; };
+		0CCE7665275C55C900C4D7FD /* CurrentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7664275C55C900C4D7FD /* CurrentSettings.swift */; };
+		0CCE7667275C55D400C4D7FD /* FavoritesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7666275C55D400C4D7FD /* FavoritesListModel.swift */; };
+		0CCE7669275C55DF00C4D7FD /* PendingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7668275C55DF00C4D7FD /* PendingListModel.swift */; };
+		0CCE766B275C55EA00C4D7FD /* WatchingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE766A275C55EA00C4D7FD /* WatchingListModel.swift */; };
+		0CCE766D275C55F800C4D7FD /* EditListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE766C275C55F800C4D7FD /* EditListScreen.swift */; };
 		5A692DC19714229A2B803F19 /* Pods_Fanimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F1952EDCD2C7FF616A2DDC /* Pods_Fanimation.framework */; };
 		831E5D3A274974EC00BA2ABD /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D39274974EC00BA2ABD /* Anime.swift */; };
 		831E5D422749823D00BA2ABD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D412749823D00BA2ABD /* APIService.swift */; };
@@ -35,6 +43,14 @@
 
 /* Begin PBXFileReference section */
 		0C172F95273F9B8600B666D6 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		0CCE765E275C555400C4D7FD /* FirebaseRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseRequests.swift; sourceTree = "<group>"; };
+		0CCE7660275C558600C4D7FD /* PopularAnimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularAnimeView.swift; sourceTree = "<group>"; };
+		0CCE7662275C55BE00C4D7FD /* CompletedListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedListModel.swift; sourceTree = "<group>"; };
+		0CCE7664275C55C900C4D7FD /* CurrentSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentSettings.swift; sourceTree = "<group>"; };
+		0CCE7666275C55D400C4D7FD /* FavoritesListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesListModel.swift; sourceTree = "<group>"; };
+		0CCE7668275C55DF00C4D7FD /* PendingListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingListModel.swift; sourceTree = "<group>"; };
+		0CCE766A275C55EA00C4D7FD /* WatchingListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchingListModel.swift; sourceTree = "<group>"; };
+		0CCE766C275C55F800C4D7FD /* EditListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditListScreen.swift; sourceTree = "<group>"; };
 		3737961C43918283C6457C1B /* Pods-Fanimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.debug.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.debug.xcconfig"; sourceTree = "<group>"; };
 		58B58BE9337315EB4222CF19 /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
 		831E5D39274974EC00BA2ABD /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
@@ -88,6 +104,7 @@
 		831E5D3B2749765800BA2ABD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0CCE7660275C558600C4D7FD /* PopularAnimeView.swift */,
 				831E5D452749A57800BA2ABD /* AnimeListView.swift */,
 				83759069274D524D007C7FA6 /* HelloUserView.swift */,
 				8375906B274D6E12007C7FA6 /* LoadingCard.swift */,
@@ -99,6 +116,7 @@
 		831E5D4027497FC600BA2ABD /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				0CCE765E275C555400C4D7FD /* FirebaseRequests.swift */,
 				831E5D412749823D00BA2ABD /* APIService.swift */,
 			);
 			path = Network;
@@ -140,6 +158,11 @@
 		E216A0BA27473308008DFF89 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				0CCE766A275C55EA00C4D7FD /* WatchingListModel.swift */,
+				0CCE7668275C55DF00C4D7FD /* PendingListModel.swift */,
+				0CCE7666275C55D400C4D7FD /* FavoritesListModel.swift */,
+				0CCE7664275C55C900C4D7FD /* CurrentSettings.swift */,
+				0CCE7662275C55BE00C4D7FD /* CompletedListModel.swift */,
 				E216A0BB27473328008DFF89 /* UserModel.swift */,
 			);
 			path = User;
@@ -148,6 +171,7 @@
 		E2C0A891272F827C00A8E343 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				0CCE766C275C55F800C4D7FD /* EditListScreen.swift */,
 				E2E6F3262729F7B100709BDC /* FanimationApp.swift */,
 				E2E6F3282729F7B100709BDC /* WelcomeScreen.swift */,
 				E2C0A892272F861500A8E343 /* ForgotPasswordScreen.swift */,
@@ -327,9 +351,13 @@
 				831E5D462749A57800BA2ABD /* AnimeListView.swift in Sources */,
 				E2C0A893272F861500A8E343 /* ForgotPasswordScreen.swift in Sources */,
 				E2C0A897272F864C00A8E343 /* SignupScreen.swift in Sources */,
+				0CCE7667275C55D400C4D7FD /* FavoritesListModel.swift in Sources */,
 				8375906C274D6E12007C7FA6 /* LoadingCard.swift in Sources */,
 				E286FA3A27406F5100BCB562 /* MainScreen.swift in Sources */,
 				8375906E274D71E9007C7FA6 /* DiscoverAnimeView.swift in Sources */,
+				0CCE765F275C555400C4D7FD /* FirebaseRequests.swift in Sources */,
+				0CCE7661275C558600C4D7FD /* PopularAnimeView.swift in Sources */,
+				0CCE7669275C55DF00C4D7FD /* PendingListModel.swift in Sources */,
 				E22DB0C62749D5CB0032C1BA /* AnimeDetailsScreen.swift in Sources */,
 				E2E6F3292729F7B100709BDC /* WelcomeScreen.swift in Sources */,
 				E246FAA8273E1297008ACDC8 /* HomeScreen.swift in Sources */,
@@ -337,12 +365,16 @@
 				E216A0BC27473328008DFF89 /* UserModel.swift in Sources */,
 				831E5D492749AFAC00BA2ABD /* ImageLoader.swift in Sources */,
 				8375906A274D524D007C7FA6 /* HelloUserView.swift in Sources */,
+				0CCE7665275C55C900C4D7FD /* CurrentSettings.swift in Sources */,
 				831E5D422749823D00BA2ABD /* APIService.swift in Sources */,
 				E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */,
+				0CCE766B275C55EA00C4D7FD /* WatchingListModel.swift in Sources */,
 				E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */,
 				E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */,
 				E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */,
 				831E5D3A274974EC00BA2ABD /* Anime.swift in Sources */,
+				0CCE7663275C55BE00C4D7FD /* CompletedListModel.swift in Sources */,
+				0CCE766D275C55F800C4D7FD /* EditListScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
