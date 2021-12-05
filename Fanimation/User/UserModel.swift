@@ -8,11 +8,11 @@
 import Foundation
 
 struct UserModel:Identifiable, Hashable, Decodable {
-	var id: Int
+	var id: String
 	var email: String
 	var profilePicUrl: String
 	
-	init(id: Int, email: String, profilePicUrl: String){
+	init(id: String, email: String, profilePicUrl: String){
 		self.id = id
 		self.email = email
 		self.profilePicUrl = profilePicUrl

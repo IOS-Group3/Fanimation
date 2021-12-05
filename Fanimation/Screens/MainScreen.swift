@@ -15,7 +15,7 @@ struct MainScreen: View {
 	}
 	
 	@State var selectedTabIndex = 0
-	
+    
 	private let tabBarImageNames = ["house.fill", "square.grid.2x2", "person.fill"]
 	private let tabBarText = ["Home", "My List", "Profile"]
 	var body: some View {

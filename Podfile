@@ -9,6 +9,7 @@ target 'Fanimation' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   # Optionally, include the Swift extensions if you're using Swift.
  pod 'FirebaseFirestoreSwift'
 end
