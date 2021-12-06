@@ -38,16 +38,4 @@ struct WatchingList: Codable {
         case score
     }
     
-    /*func searchAnime(watching: [WatchingList]) -> (WatchingList) {
-        if watching.contains(where: {$0.animeId == animeId}) {
-            //get item
-            if let item = watching.first(where: {$0.animeId == animeId}) {
-                return item
-            }
-            else {
-                return WatchingList()
-            }
-        }
-        return WatchingList()
-    }*/
 }

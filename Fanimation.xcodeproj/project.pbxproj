@@ -15,6 +15,7 @@
 		0CCE7669275C55DF00C4D7FD /* PendingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7668275C55DF00C4D7FD /* PendingListModel.swift */; };
 		0CCE766B275C55EA00C4D7FD /* WatchingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE766A275C55EA00C4D7FD /* WatchingListModel.swift */; };
 		0CCE766D275C55F800C4D7FD /* EditListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE766C275C55F800C4D7FD /* EditListScreen.swift */; };
+		0CCE7671275E0D6E00C4D7FD /* DateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE7670275E0D6D00C4D7FD /* DateScreen.swift */; };
 		831E5D3A274974EC00BA2ABD /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D39274974EC00BA2ABD /* Anime.swift */; };
 		831E5D422749823D00BA2ABD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D412749823D00BA2ABD /* APIService.swift */; };
 		831E5D462749A57800BA2ABD /* AnimeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E5D452749A57800BA2ABD /* AnimeListView.swift */; };
@@ -51,6 +52,7 @@
 		0CCE7668275C55DF00C4D7FD /* PendingListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingListModel.swift; sourceTree = "<group>"; };
 		0CCE766A275C55EA00C4D7FD /* WatchingListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchingListModel.swift; sourceTree = "<group>"; };
 		0CCE766C275C55F800C4D7FD /* EditListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditListScreen.swift; sourceTree = "<group>"; };
+		0CCE7670275E0D6D00C4D7FD /* DateScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateScreen.swift; sourceTree = "<group>"; };
 		3B56B74B14EC84230DD7465E /* Pods-Fanimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fanimation.release.xcconfig"; path = "Target Support Files/Pods-Fanimation/Pods-Fanimation.release.xcconfig"; sourceTree = "<group>"; };
 		6199D02E9B6038BC831A376D /* Pods_Fanimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fanimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831E5D39274974EC00BA2ABD /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		E2C0A891272F827C00A8E343 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				0CCE7670275E0D6D00C4D7FD /* DateScreen.swift */,
 				0CCE766C275C55F800C4D7FD /* EditListScreen.swift */,
 				E2E6F3262729F7B100709BDC /* FanimationApp.swift */,
 				E2E6F3282729F7B100709BDC /* WelcomeScreen.swift */,
@@ -369,6 +372,7 @@
 				831E5D422749823D00BA2ABD /* APIService.swift in Sources */,
 				E2C0A890272F670100A8E343 /* LaunchScreen.swift in Sources */,
 				0CCE766B275C55EA00C4D7FD /* WatchingListModel.swift in Sources */,
+				0CCE7671275E0D6E00C4D7FD /* DateScreen.swift in Sources */,
 				E246FAAA273E12F4008ACDC8 /* MyListScreen.swift in Sources */,
 				E2C0A895272F863A00A8E343 /* LoginScreen.swift in Sources */,
 				E246FAAC273E1323008ACDC8 /* ProfileScreen.swift in Sources */,
