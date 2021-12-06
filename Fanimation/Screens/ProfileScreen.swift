@@ -30,78 +30,88 @@ struct ProfileScreen: View {
 	var body: some View {
         NavigationView {
             ScrollView {
-                HStack {
-                    Spacer()
-                    VStack {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 25, style: .continuous).fill(Color.blue).frame(height: 140)
-                                .padding(EdgeInsets(top: 150, leading: 20, bottom: 0, trailing: 20)).shadow(color: Color.black.opacity(0.7), radius: 4, x: 1, y: 1)
-                            HStack {
-                                AsyncImage(
-                                    url: URL(string: anime.image_url)!,
-                                    placeholder: { LoadingCard() },
-                                    image: {
-                                        Image(uiImage: $0)
-                                            .resizable()
-                                    }
-                                ).frame(width: 130, height: 200).cornerRadius(15).padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0)).shadow(radius: 10)
-                                //Spacer()
-                                VStack (alignment: .leading){
-                                    Text("Username").font(Font.custom("Poppins-SemiBold", size: 18))
-                                    Text("Joined 2021").font(Font.custom("Poppins-Regular", size: 14))
-                                }.padding(EdgeInsets(top: 120, leading: 10, bottom: 0, trailing: 0))
-                                Spacer()
-                            }
-                        }
-                        ZStack (alignment: .leading){
-                            RoundedRectangle(cornerRadius: 25, style: .continuous).fill(Color.blue).frame(height: 250)
-                                .padding(EdgeInsets(top: 40, leading: 20, bottom: 0, trailing: 20)).shadow(color: Color.black.opacity(0.7), radius: 4, x: 1, y: 1)
-                            VStack (alignment: .leading){
-                                Text("Anime stats").padding(EdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 20)).font(Font.custom("Poppins-SemiBold", size: 20))
-                                HStack {
-                                    VStack (alignment: .leading) {
-                                        Circle().fill(Color.purple).frame(width: 12, height: 12).padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0))
-                                        Circle().fill(Color.green).frame(width: 12, height: 12).padding(EdgeInsets(top: 15, leading: 40, bottom: 0, trailing: 0))
-                                        Circle().fill(Color.gray).frame(width: 12, height: 12).padding(EdgeInsets(top: 15, leading: 40, bottom: 0, trailing: 0))
-                                    }
-                                    VStack (alignment: .leading){
-                                        Text("Watching").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    
-                                        Text("Completed").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    
-                                        Text("Plan to Watch").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    }
-                                    VStack (alignment: .trailing){
-                                        Text("\(watchingCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    
-                                        Text("\(completedCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    
-                                        Text("\(plantoWatchCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
-                                    }
-                                }
-                                HStack {
-                                    Spacer()
-                                    ZStack (alignment: .leading){
-                                        // Plan to Watch percentage
-                                        RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.gray.opacity(0.9)).frame(width: 200, height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
-                                        // Completed Percentage
-                                        RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.green).frame(width: CGFloat(watchingWidth) + CGFloat(completedWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
-                                        // Watching percentage
-                                        RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.purple).frame(width: CGFloat( watchingWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
-                                    
-                                    }
-                                    Spacer()
-                                }
-                            
-                            }
-                        }
-                        // TODO: Update AnimeListView to pull from DB when URL is null or title is 'Favourites'
-                        AnimeListView(url: popularity_url!, title: "Favourites")
+                ZStack (alignment: .topLeading){
+                    // Increase height of background by drag amount
+                    GeometryReader { g in
+                        Image("geo-landscape-valley").resizable().aspectRatio(1, contentMode: .fill)
+                            .offset(y: g.frame(in: .global).minY > 0 ? -g.frame(in: .global).minY : 0)
+                            .frame(width:UIScreen.main.bounds.width, height: g.frame(in: .global).minY > 0 ? UIScreen.main.bounds.height / 1.5 + g.frame(in: .global).minY : UIScreen.main.bounds.height / 1.5).ignoresSafeArea(.all)
                         
-                    }
-                    Spacer()
+                    }.frame(height: UIScreen.main.bounds.height / 1.5)
+                    HStack {
+                        Spacer()
+                        VStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 25, style: .continuous).fill(Color.blue).frame(height: 140)
+                                    .padding(EdgeInsets(top: 150, leading: 20, bottom: 0, trailing: 20)).shadow(color: Color.black.opacity(0.7), radius: 4, x: 1, y: 1)
+                                HStack {
+                                    AsyncImage(
+                                        url: URL(string: anime.image_url)!,
+                                        placeholder: { LoadingCard() },
+                                        image: {
+                                            Image(uiImage: $0)
+                                                .resizable()
+                                        }
+                                    ).frame(width: 130, height: 200).cornerRadius(15).padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0)).shadow(radius: 10)
+                                    //Spacer()
+                                    VStack (alignment: .leading){
+                                        Text("Username").font(Font.custom("Poppins-SemiBold", size: 18))
+                                        Text("Joined 2021").font(Font.custom("Poppins-Regular", size: 14))
+                                    }.padding(EdgeInsets(top: 120, leading: 10, bottom: 0, trailing: 0))
+                                    Spacer()
+                                }
+                            }
+                            ZStack (alignment: .leading){
+                                RoundedRectangle(cornerRadius: 25, style: .continuous).fill(Color.blue).frame(height: 250)
+                                    .padding(EdgeInsets(top: 40, leading: 20, bottom: 0, trailing: 20)).shadow(color: Color.black.opacity(0.7), radius: 4, x: 1, y: 1)
+                                VStack (alignment: .leading){
+                                    Text("Anime stats").padding(EdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 20)).font(Font.custom("Poppins-SemiBold", size: 20))
+                                    HStack {
+                                        VStack (alignment: .leading) {
+                                            Circle().fill(Color.purple).frame(width: 12, height: 12).padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0))
+                                            Circle().fill(Color.green).frame(width: 12, height: 12).padding(EdgeInsets(top: 15, leading: 40, bottom: 0, trailing: 0))
+                                            Circle().fill(Color.gray).frame(width: 12, height: 12).padding(EdgeInsets(top: 15, leading: 40, bottom: 0, trailing: 0))
+                                        }
+                                        VStack (alignment: .leading){
+                                            Text("Watching").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        
+                                            Text("Completed").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        
+                                            Text("Plan to Watch").padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        }
+                                        VStack (alignment: .trailing){
+                                            Text("\(watchingCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        
+                                            Text("\(completedCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        
+                                            Text("\(plantoWatchCount)").padding(EdgeInsets(top: 5, leading: 40, bottom: 0, trailing: 0)).font(Font.custom("Poppins-SemiBold", size: 12))
+                                        }
+                                    }
+                                    HStack {
+                                        Spacer()
+                                        ZStack (alignment: .leading){
+                                            // Plan to Watch percentage
+                                            RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.gray.opacity(0.9)).frame(width: 200, height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                                            // Completed Percentage
+                                            RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.green).frame(width: CGFloat(watchingWidth) + CGFloat(completedWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                                            // Watching percentage
+                                            RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.purple).frame(width: CGFloat( watchingWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                                        
+                                        }
+                                        Spacer()
+                                    }
+                                
+                                }
+                            }
+                            // TODO: Update AnimeListView to pull from DB when URL is null or title is 'Favourites'
+                            AnimeListView(url: popularity_url!, title: "Favourites")
+                            
+                        }
+                        Spacer()
+                    }.padding(.top, 120)
                 }
-            }.onAppear(perform: calculateProgress).toolbar {
+            }.edgesIgnoringSafeArea(.top)
+                .onAppear(perform: calculateProgress).toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         print("Saved tapped")
