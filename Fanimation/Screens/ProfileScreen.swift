@@ -16,6 +16,7 @@ struct ProfileScreen: View {
     @State var plantoWatchCount: Int = 15
     @State var totalCount: Int = 0
     
+
     @State var watchingWidth: Int = 0
     @State var completedWidth: Int = 0
     
@@ -118,6 +119,25 @@ struct ProfileScreen: View {
             
         }
     }
+
+//    var body: some View {
+//		Text("Profile screen")
+//		Button("Logout") {
+//			let firebaseAuth = Auth.auth()
+//			do {
+//				try firebaseAuth.signOut()
+//				onLogOut()
+//			} catch let signOutError as NSError {
+//				print("Error signing out: %@", signOutError)
+//			}
+//			
+//		}.padding()
+//			.frame(width: 300, height: 50)
+//			.background(Color("blue1"))
+//			.cornerRadius(20)
+//			.foregroundColor(Color("light"))
+//	}
+
 }
 
 struct ProfileScreen_Previews: PreviewProvider {
@@ -150,6 +170,12 @@ func uploadProfile(imageData:URL) {
         }
     }
     
+}
+func onLogOut() {
+	if let window = UIApplication.shared.windows.first {
+		window.rootViewController = UIHostingController(rootView: WelcomeScreen())
+		window.makeKeyAndVisible()
+	}
 }
 
 func updateUserProfile(photoURL:URL) {
