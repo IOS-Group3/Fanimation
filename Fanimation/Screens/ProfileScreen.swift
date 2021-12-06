@@ -13,6 +13,20 @@ struct ProfileScreen: View {
     
     var body: some View {
 		Text("Profile screen")
+		Button("Logout") {
+			let firebaseAuth = Auth.auth()
+			do {
+				try firebaseAuth.signOut()
+				onLogOut()
+			} catch let signOutError as NSError {
+				print("Error signing out: %@", signOutError)
+			}
+			
+		}.padding()
+			.frame(width: 300, height: 50)
+			.background(Color("blue1"))
+			.cornerRadius(20)
+			.foregroundColor(Color("light"))
 	}
 }
 
@@ -45,6 +59,12 @@ func uploadProfile(imageData:URL) {
         }
     }
     
+}
+func onLogOut() {
+	if let window = UIApplication.shared.windows.first {
+		window.rootViewController = UIHostingController(rootView: WelcomeScreen())
+		window.makeKeyAndVisible()
+	}
 }
 
 func updateUserProfile(photoURL:URL) {
