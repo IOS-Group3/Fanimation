@@ -39,7 +39,6 @@ struct EditListScreen: View {
         self.dateStart = currSettings.wrappedValue.startDate
         self.dateEnd = currSettings.wrappedValue.endDate
         self.currSettings = currSettings
-        
     }
     
     var body: some View {
@@ -65,37 +64,37 @@ struct EditListScreen: View {
                         let firebase = FirebaseRequests()
                             //List has only been removed
                              if isRemoved && (statusList == currSettings.wrappedValue.statusList)  {
-                                 firebase.DeleteAnime(animeId: animeId, list: statusList)
+                                 firebase.DeleteAnime(animeId: currSettings.wrappedValue.animeId, list: statusList)
                              }
                             //Anime switched to another list
                             else if(statusList != currSettings.wrappedValue.statusList) {
-                                firebase.DeleteAnime(animeId: animeId, list: currSettings.wrappedValue.statusList)
+                                firebase.DeleteAnime(animeId: currSettings.wrappedValue.animeId, list: currSettings.wrappedValue.statusList)
                                 //Watching List
                                 if statusList == 1 {
-                                    firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, progress: progressButton, score: scoreButton))
+                                    firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, progress: progressButton, score: scoreButton))
                                 }
                                 //Planning List
                                 else if statusList == 2  {
-                                    firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle))
+                                    firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle, imageURL:imageURL))
                                 }
                                 //Completed List
                                 else if statusList == 3 {
-                                    firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, endDate: dateEnd, score: scoreButton))
+                                    firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, endDate: dateEnd, score: scoreButton))
                                 }
                              }
                         //Add anime for the first time
                         else if statusList == currSettings.wrappedValue.statusList{
                             //Watching List
                             if statusList == 1 {
-                                firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, progress: progressButton, score: scoreButton))
+                                firebase.AddToWatching(watching: WatchingList(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, progress: progressButton, score: scoreButton))
                             }
                             //Planning List
                             else if statusList == 2  {
-                                firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle))
+                                firebase.AddToPlan(planning: PendingList(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL))
                             }
                             //Completed List
                             else if statusList == 3 {
-                                firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, endDate: dateEnd, score: scoreButton))
+                                firebase.AddToCompleted(completed: CompletedList(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, endDate: dateEnd, score: scoreButton))
                             }
                         }
                              

@@ -116,8 +116,6 @@ struct AnimeDetailsScreen: View {
 			.navigationBarBackButtonHidden(true)
 			.navigationBarItems(leading: btnBack)
             .overlay(editButton(animeTitle: anime.title, animeId: anime.mal_id, imageURL: anime.image_url))
-            
-            
 	}
 }
 

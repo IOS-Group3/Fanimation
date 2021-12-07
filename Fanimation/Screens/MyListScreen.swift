@@ -3,10 +3,10 @@
 //  Fanimation
 //
 //  Created by Ahmed  Elshetany  on 11/11/21.
-//  Last Modified by Recleph Mere on 12/06/21.
+//  Last Modified by Paola Jose Mere on 12/06/21.
 
 import SwiftUI
-//import Firebase
+
 import FirebaseAuth
 struct MyListScreen: View {
 	@State var user: UserModel = UserModel(id: "33", email: "aelshetany@knights.ucf", username: "", profilePicUrl: "https://firebasestorage.googleapis.com/v0/b/fanimation-a2ee9.appspot.com/o/profileImages%2Fblank.png?alt=media&token=c1a5957e-aa94-4ff8-84df-d298aa2567e9")
@@ -17,9 +17,10 @@ struct MyListScreen: View {
     @State var loading = true
 	
 	
-	var watchingList: [Anime] =  [Anime(),Anime(),Anime()]
-	var planToWatchList: [Anime] =  [Anime(),Anime(),Anime()]
-	var completed: [Anime] =  [Anime(),Anime(),Anime()]
+	
+    @State var watchingList: [WatchingList] =  []
+	@State var pendingList: [PendingList] =  []
+	@State var completedList: [CompletedList] =  []
     
     func getUserInfo() {
         firebaseServices.fetchUserProfile() { user in
@@ -43,6 +44,15 @@ struct MyListScreen: View {
 							HStack {
 								Button(action: {
 									self.selectedTabIndex = num
+                                    if num == 0 {
+                                        firebaseServices
+                                    }
+                                    else if num == 1 {
+                                        
+                                    }
+                                    else { //num == 2
+                                        
+                                    }
 								}, label: {
 									Spacer()
 									
