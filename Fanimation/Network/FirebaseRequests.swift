@@ -3,11 +3,12 @@
 //  Fanimation
 //
 //  Created by Paola Jose on 11/28/21.
-//
+//  Last Modified by Recleph Mere on 12/06/21
 
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 import grpc
 import SwiftUI
 
@@ -15,6 +16,25 @@ public class FirebaseRequests {
     let db = Firestore.firestore()
     var ref: DocumentReference? = nil
     let userEmail = Auth.auth().currentUser?.email
+    
+    
+    // Get User profile information
+    func fetchUserProfile(completionHandler: @escaping (UserModel) -> Void) {
+        
+        
+        db.collection("Users").document(userEmail!).getDocument { (document, error) in
+            guard let document = document, document.exists else {
+                print("Error while getting profile")
+                return
+            }
+            let data = document.data()
+            let usermodel = UserModel(id: data!["userID"] as! String, email: self.userEmail!, username: data!["username"] as! String, profilePicUrl: data!["profileImage"] as! String)
+            print("Successfully fetched user info")
+            completionHandler(usermodel)
+            
+        }
+        
+    }
     
     //Adds  the Anime to the appropriate list
     func AddToPlan(planning: PendingList) {

@@ -3,24 +3,38 @@
 //  Fanimation
 //
 //  Created by Ahmed  Elshetany  on 11/11/21.
-//
+//  Last Modified by Recleph Mere on 12/06/21.
 
 import SwiftUI
 //import Firebase
 import FirebaseAuth
 struct MyListScreen: View {
-	var user: UserModel = UserModel(id: "33", email: "aelshetany@knights.ucf", profilePicUrl: "https://lh6.googleusercontent.com/proxy/8e57l1xjHUiJZlEWvzL2Spk7Znoc1SlogT3JeZWkGOlF1oOiOG5UzG91IxKZ92CUkqBRfEDQ8g5I22tOmrsEbEzqSg=w1200-h630-p-k-no-nu")
+	@State var user: UserModel = UserModel(id: "33", email: "aelshetany@knights.ucf", username: "", profilePicUrl: "https://firebasestorage.googleapis.com/v0/b/fanimation-a2ee9.appspot.com/o/profileImages%2Fblank.png?alt=media&token=c1a5957e-aa94-4ff8-84df-d298aa2567e9")
 	
 	@State var selectedTabIndex: Int = 0
 	private let tabBarText = ["Watching", "Plan to Watch", "Completed"]
+    let firebaseServices = FirebaseRequests()
+    @State var loading = true
 	
 	
 	var watchingList: [Anime] =  [Anime(),Anime(),Anime()]
 	var planToWatchList: [Anime] =  [Anime(),Anime(),Anime()]
 	var completed: [Anime] =  [Anime(),Anime(),Anime()]
+    
+    func getUserInfo() {
+        firebaseServices.fetchUserProfile() { user in
+            self.user = user
+            loading = false
+            
+        }
+    }
 	var body: some View {
 		VStack {
-			User(user: user)
+            if loading {
+                ProgressView()
+            } else {
+                User(user: user)
+            }
 			ZStack {
 				VStack {
 					
@@ -57,7 +71,7 @@ struct MyListScreen: View {
 						.accentColor(.gray)
 					
 				}.edgesIgnoringSafeArea(.bottom)
-			}
+            }.onAppear(perform: getUserInfo)
 			Spacer()
 		}
 		
@@ -69,6 +83,7 @@ struct User : View {
 	var body : some View {
 		HStack {
 			Spacer()
+        
 			AsyncImage(
 				url: URL(string: user.profilePicUrl)!,
 				placeholder: { LoadingCard()},
@@ -78,10 +93,10 @@ struct User : View {
 				.clipShape(Circle())
 				.shadow(radius: 7)
 			Spacer()
-			Text(user.email).font(.title3)
+			Text(user.username).font(.title3)
 				.fontWeight(.heavy)
 			Spacer()
-		}
+        }
 	}
 }
 struct AnimeList: View {

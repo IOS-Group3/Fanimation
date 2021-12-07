@@ -31,7 +31,7 @@ struct HelloUserView: View {
                         .fontWeight(.medium)
                         .foregroundColor(.white)
                     Spacer()
-                    Text(user.email)
+                    Text(user.username)
                         .font(.title3)
                         .fontWeight(.heavy)
                     Spacer()
