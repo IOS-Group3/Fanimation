@@ -115,7 +115,7 @@ struct AnimeDetailsScreen: View {
 		}.ignoresSafeArea()
 			.navigationBarBackButtonHidden(true)
 			.navigationBarItems(leading: btnBack)
-            .overlay(editButton(animeTitle: anime.title, animeId: anime.mal_id))
+            .overlay(editButton(animeTitle: anime.title, animeId: anime.mal_id, imageURL: anime.image_url))
             
             
 	}
@@ -125,13 +125,15 @@ struct editButton: View {
     @State var editToggle:Bool = false
     @State var curr:Settings
     @State var isLoading:Bool = false
-    let  animeTitle:String
-    let  animeId:Int
+    let animeTitle:String
+    let animeId:Int
+    let imageURL:String
     
-    init(animeTitle:String, animeId:Int) {
+    init(animeTitle:String, animeId:Int, imageURL:String) {
         self.animeTitle = animeTitle
         self.animeId = animeId
-        self.curr = Settings(animeId: animeId, animeTitle: animeTitle)
+        self.imageURL = imageURL
+        self.curr = Settings(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL)
     }
     
     var body: some View {
@@ -147,7 +149,7 @@ struct editButton: View {
                         //check
                         isLoading.toggle() //Loading activator while settings are fetched
                         let firebase = FirebaseRequests()
-                        firebase.queryAnime(animeId: animeId, animeTitle:animeTitle) { (result) in
+                        firebase.queryAnime(animeId: animeId, animeTitle:animeTitle, imageURL: imageURL) { (result) in
                             curr = result
                             editToggle.toggle()
                             isLoading.toggle()

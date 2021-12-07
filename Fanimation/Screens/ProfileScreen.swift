@@ -3,7 +3,7 @@
 //  Fanimation
 //
 //  Created by Ahmed  Elshetany  on 11/11/21.
-//  Last Modified by Recleph Mere on 12/04/21
+//  Last Modified by Recleph Mere on 12/07/21
 
 import SwiftUI
 import Firebase
@@ -132,7 +132,7 @@ struct ProfileScreen: View {
                                 }
                             }
                             // TODO: Update AnimeListView to pull from DB when URL is null or title is 'Favourites'
-                            AnimeListView(url: popularity_url!, title: "Favourites")
+                            AnimeListView(title: "Favourites")
                             
                         }
                         Spacer()

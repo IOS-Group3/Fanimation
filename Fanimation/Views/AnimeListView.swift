@@ -9,19 +9,28 @@ import SwiftUI
 
 struct AnimeListView: View {
     @State var animelist = [Anime]()
+    @State var favoriteList = [FavoritedAnime]()
     @State var anime = Anime()
     @State var showDetailView = false
     let service = APIService()
-    var url: URL
+    let firebaseService = FirebaseRequests()
+    var url: URL?
     var title: String
     
     func loadData() {
-        service.fetchAnimeList(url: url) { result in
-            switch result {
-            case .success(let animelist):
-                self.animelist = animelist
-            case .failure(_):
-                print("Error invoking URL")
+        if(url != nil) {
+            service.fetchAnimeList(url: url!) { result in
+                switch result {
+                case .success(let animelist):
+                    self.animelist = animelist
+                case .failure(_):
+                    print("Error invoking URL")
+                }
+            }
+        } else {
+            firebaseService.fetchFavoritedList {
+                list in
+                self.favoriteList = list
             }
         }
     }
@@ -50,21 +59,42 @@ struct AnimeListView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 20) {
-                    ForEach(animelist, id: \.mal_id) { anime in
+                    
+                    if(url != nil) {
+                            ForEach(animelist, id: \.mal_id) { anime in
+                            NavigationLink(destination: AnimeDetailsScreen(anime: self.anime), isActive: $showDetailView) {
+                                ZStack (alignment: .bottomTrailing){
+                                    AsyncImage(
+                                        url: URL(string: anime.image_url)!,
+                                        placeholder: { LoadingCard() },
+                                        image: {Image(uiImage: $0).resizable()}
+                                    )
+                                        .frame(width: 200, height: 300)
+                                        .cornerRadius(15).onTapGesture { openDetailView(animeID: anime.mal_id)}
+                                    VStack {
+                                        Text(anime.title).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
+                                    }.frame(width: 200, height: 300, alignment: .bottomLeading).cornerRadius(15)
+                                }
+                            }
+                        }
+                    } else {
+                        ForEach(favoriteList, id: \.animeId) { anime in
                         NavigationLink(destination: AnimeDetailsScreen(anime: self.anime), isActive: $showDetailView) {
                             ZStack (alignment: .bottomTrailing){
                                 AsyncImage(
-                                    url: URL(string: anime.image_url)!,
+                                    url: URL(string: anime.imageURL)!,
                                     placeholder: { LoadingCard() },
                                     image: {Image(uiImage: $0).resizable()}
                                 )
                                     .frame(width: 200, height: 300)
-                                    .cornerRadius(15).onTapGesture { openDetailView(animeID: anime.mal_id)}
+                                    .cornerRadius(15).onTapGesture { openDetailView(animeID: anime.animeId)}
                                 VStack {
-                                    Text(anime.title).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
+                                    Text(anime.animeTitle).font(.system(size: 20, weight: .heavy, design: .default)).foregroundColor(Color.white).padding(20)
                                 }.frame(width: 200, height: 300, alignment: .bottomLeading).cornerRadius(15)
                             }
-						}
+                        }
+                    }
+                        
                     }
                 }
             }.padding(.horizontal)

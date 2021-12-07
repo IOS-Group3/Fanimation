@@ -87,7 +87,7 @@ public class FirebaseRequests {
         }
     }
     
-    func queryAnime(animeId:Int, animeTitle:String, completion: @escaping (Settings) -> ()) ->() {
+    func queryAnime(animeId:Int, animeTitle:String, imageURL: String, completion: @escaping (Settings) -> ()) ->() {
         let ref = db.collection("Users").document(userEmail!)
         ref.collection("Watching").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
             if err != nil {
@@ -106,11 +106,11 @@ public class FirebaseRequests {
                                         
                                     } else {
                                         if QuerySnapshot!.count > 0 {
-                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: true, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, imageURL: imageURL, statusList: 1, isFavorited: true, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
                                             completion(settings)
                                         }
                                         else {
-                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: false, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, imageURL: imageURL, statusList: 1, isFavorited: false, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
                                             completion(settings)
                                         }
                                     }
@@ -138,11 +138,11 @@ public class FirebaseRequests {
                                                     
                                                 } else {
                                                     if QuerySnapshot!.count > 0 {
-                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, statusList: 2, isFavorited: true)
+                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, imageURL: imageURL, statusList: 2, isFavorited: true)
                                                         completion(settings)
                                                     }
                                                     else {
-                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, statusList: 2, isFavorited: false)
+                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, imageURL: imageURL, statusList: 2, isFavorited: false)
                                                         completion(settings)
                                                     }
                                                 }
@@ -171,11 +171,11 @@ public class FirebaseRequests {
                                                                 
                                                             } else {
                                                                 if QuerySnapshot!.count > 0 {
-                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, statusList: 3, isFavorited: true, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
+                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, imageURL: imageURL, statusList: 3, isFavorited: true, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
                                                                     completion(settings)
                                                                 }
                                                                 else {
-                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, statusList: 3, isFavorited: false, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
+                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, imageURL: imageURL, statusList: 3, isFavorited: false, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
                                                                     completion(settings)
                                                                 }
                                                             }
@@ -187,7 +187,7 @@ public class FirebaseRequests {
                                         }
                                         }
                                         else {
-                                            let settings = Settings(animeId: animeId, animeTitle: animeTitle)
+                                            let settings = Settings(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL)
                                             completion(settings)
                                         }
                                     }
@@ -292,7 +292,7 @@ public class FirebaseRequests {
     }*/
     
     //Updates the favorites list
-    func UpdateFavorites(add:Bool, favorites: FavoriteList) {
+    func UpdateFavorites(add:Bool, favorites: FavoritedAnime) {
         if add {
             do {
                 try db.collection("Users").document(userEmail!).collection("Favorites").document(String(favorites.animeId)).setData(from: favorites)
@@ -310,8 +310,38 @@ public class FirebaseRequests {
     }
     
     
+    func fetchFavoritedList(completion: @escaping ([FavoritedAnime]) -> Void) {
+        let ref = db.collection("Users").document(userEmail!)
+        var favoritesList = [FavoritedAnime]()
+        
+        ref.collection("Favorites").getDocuments() { (QuerySnapshot, err) in
+            if err != nil {
+                
+            }
+            else {
+                for document in QuerySnapshot!.documents {
+                    let result = Result {
+                        try document.data(as: FavoritedAnime.self)
+                    }
+                    switch result {
+                        case .success(let favorites):
+                            if let favorites = favorites {
+                                favoritesList.append(favorites)
+                            }
+                        case .failure(let error): do {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+                completion(favoritesList)
+            }
+        }
+        
+    }
+    
+    
     //Retrieves all lists
-    func RetrieveLists(watchingList: Binding<[WatchingList]>, pendingList: Binding<[PendingList]>, completedList: Binding<[CompletedList]>, favoritesList:Binding<[FavoriteList]>) -> () {
+    func RetrieveLists(watchingList: Binding<[WatchingList]>, pendingList: Binding<[PendingList]>, completedList: Binding<[CompletedList]>, favoritesList:Binding<[FavoritedAnime]>) -> () {
         let ref = db.collection("Users").document(userEmail!)
         
         DispatchQueue.global(qos: .default).async {
@@ -407,7 +437,7 @@ public class FirebaseRequests {
                 else {
                     for document in QuerySnapshot!.documents {
                         let result = Result {
-                            try document.data(as: FavoriteList.self)
+                            try document.data(as: FavoritedAnime.self)
                         }
                         switch result {
                             case .success(let favorites):

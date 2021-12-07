@@ -3,7 +3,7 @@
 //  Fanimation
 //
 //  Created by Paola Jose on 11/26/21.
-//
+//  Last Modified: 12/07/21 by Recleph Mere
 
 import SwiftUI
 
@@ -23,11 +23,13 @@ struct EditListScreen: View {
     @State var progressButton: Int
     let animeTitle:String
     let animeId:Int
+    let imageURL:String
     var currSettings: Binding<Settings>
     
     init(editToggle: Binding<Bool>, currSettings:Binding<Settings>) {
         self.animeTitle = currSettings.wrappedValue.animeTitle
         self.animeId = currSettings.wrappedValue.animeId
+        self.imageURL = currSettings.wrappedValue.imageURL
         self.editToggle = editToggle
         self.statusList = currSettings.wrappedValue.statusList
         self.isFavorited = currSettings.wrappedValue.isFavorited
@@ -99,21 +101,21 @@ struct EditListScreen: View {
                              
                         //Added/Removed to favorites
                         if isFavorited != currSettings.wrappedValue.isFavorited {
-                            firebase.UpdateFavorites(add: isFavorited, favorites: FavoriteList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, endDate: dateEnd, score: scoreButton))
+                            firebase.UpdateFavorites(add: isFavorited, favorites: FavoritedAnime(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, endDate: dateEnd, score: scoreButton))
                              }
                         else if isFavorited { //Favorites but something changed
                             if dateStart != currSettings.wrappedValue.startDate || dateEnd != currSettings.wrappedValue.endDate || scoreButton != currSettings.wrappedValue.scoreButton {
-                                firebase.UpdateFavorites(add: isFavorited, favorites: FavoriteList(animeId: animeId, animeTitle: animeTitle, startDate: dateStart, endDate: dateEnd, score: scoreButton))
+                                firebase.UpdateFavorites(add: isFavorited, favorites: FavoritedAnime(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, startDate: dateStart, endDate: dateEnd, score: scoreButton))
                             }
                                 
                         }
                              
                         //Update current lists
                         if isRemoved && statusList == currSettings.wrappedValue.statusList {
-                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle, statusList: statusList, isFavorited: isFavorited, scoreButton: scoreButton, progressButton: progressButton)
+                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL, statusList: statusList, isFavorited: isFavorited, scoreButton: scoreButton, progressButton: progressButton)
                         }
                         else {
-                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle)
+                            currSettings.wrappedValue = Settings(animeId: animeId, animeTitle: animeTitle, imageURL: imageURL)
                         }
                         
                         
