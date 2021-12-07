@@ -217,6 +217,43 @@ public class FirebaseRequests {
             }
         }
     }
+    
+    func getCollectionCounts(completion: @escaping([Int]) -> ()) {
+        var counts = [Int]()
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        DispatchQueue.global().async {
+            
+            
+            self.fetchWatchingList {
+                list in
+                counts.append(list.count)
+                semaphore.signal()
+                
+            }
+            
+            semaphore.wait()
+            
+            self.fetchCompletedList {
+                list in
+                counts.append(list.count)
+                semaphore.signal()
+            }
+            
+            semaphore.wait()
+            
+            self.fetchPendingList {
+                list in
+                counts.append(list.count)
+                semaphore.signal()
+            }
+            
+            semaphore.wait()
+            
+            completion(counts)
+            
+        }
+    }
         
     func fetchFavoritedList(completion: @escaping ([FavoritedAnime]) -> Void) {
         let ref = db.collection("Users").document(userEmail!)
@@ -247,41 +284,33 @@ public class FirebaseRequests {
         
     }
     
-
-  
-    //Retrieve Watching
-    func fetchWatchingList(completion: @escaping ([WatchingList])->()) {
+    // Retrieve Watching Collection
+    func fetchWatchingList(completion: @escaping ([WatchingList]) -> Void) {
         let ref = db.collection("Users").document(userEmail!)
-        var watchingList:[WatchingList] = []
+        var watchingList = [WatchingList]()
         
         ref.collection("Watching").getDocuments() { (QuerySnapshot, err) in
             if err != nil {
-                    print(err?.localizedDescription)
-
+                
             }
             else {
                 for document in QuerySnapshot!.documents {
                     let result = Result {
                         try document.data(as: WatchingList.self)
-                }
-                switch result {
-                    case .success(let watch):
-                        if let watch = watch {
-                            watchingList.append(watch)
-                        }
-                        else {
-                                    
-                        }
-                    case .failure(let error): do {
+                    }
+                    switch result {
+                        case .success(let watching):
+                            if let watching = watching {
+                                watchingList.append(watching)
+                            }
+                        case .failure(let error): do {
                             print(error.localizedDescription)
-
+                        }
                     }
                 }
-                    completion(watchingList)
+                completion(watchingList)
             }
         }
-    }
-
     }
     
     //Retrieve Planning
@@ -300,17 +329,14 @@ public class FirebaseRequests {
                         try document.data(as: PendingList.self)
                     }
                     switch result {
-                    case .success(let planning):
-                        if let planning = planning {
-                            pendingList.append(planning)
+                        case .success(let planning):
+                            if let planning = planning {
+                                pendingList.append(planning)
+                            }
+                        case .failure(let error): do {
+                            print(error.localizedDescription)
                         }
-                        else {
-                            
-                        }
-                    case .failure(let error): do {
-                        print(error.localizedDescription)
                     }
-                }
                 }
                 completion(pendingList)
             }
@@ -333,16 +359,13 @@ public class FirebaseRequests {
                         try document.data(as: CompletedList.self)
                     }
                     switch result {
-                    case .success(let completed):
-                        if let completed = completed {
-                            completedList.append(completed)
+                        case .success(let completed):
+                            if let completed = completed {
+                                completedList.append(completed)
+                            }
+                        case .failure(let error): do {
+                            print(error.localizedDescription)
                         }
-                        else {
-                            
-                        }
-                    case .failure(let error): do {
-                        print(error.localizedDescription)
-                    }
                     }
                 }
                 completion(completedList)

@@ -12,9 +12,9 @@ struct ProfileScreen: View {
     let anime = Anime()
     let firebaseServices = FirebaseRequests()
     let popularity_url = URL(string:  "https://api.jikan.moe/v3/top/anime/1/bypopularity")
-    @State var watchingCount: Int = 13
-    @State var completedCount: Int = 21
-    @State var plantoWatchCount: Int = 15
+    @State var watchingCount: Int = 0
+    @State var completedCount: Int = 0
+    @State var plantoWatchCount: Int = 0
     @State var totalCount: Int = 0
     
 
@@ -30,8 +30,10 @@ struct ProfileScreen: View {
     
     func calculateProgress() {
         totalCount = watchingCount + completedCount + plantoWatchCount
-        watchingWidth = Int(((Double(watchingCount) / Double(totalCount)) * 200.0).rounded(.down))
-        completedWidth = Int(((Double(completedCount) / Double(totalCount)) * 200.0).rounded(.down))
+        self.watchingWidth = Int(((Double(watchingCount) / Double(totalCount)) * 200.0).rounded(.down))
+        self.completedWidth = Int(((Double(completedCount) / Double(totalCount)) * 200.0).rounded(.down))
+        
+        
     }
     
     func initialize() {
@@ -49,8 +51,14 @@ struct ProfileScreen: View {
             
         }
         
-        calculateProgress()
-        
+        firebaseServices.getCollectionCounts {
+            count in
+            self.watchingCount = count[0]
+            self.completedCount = count[1]
+            self.plantoWatchCount = count[2]
+            
+            calculateProgress()
+        }
     }
 	var body: some View {
         NavigationView {
@@ -123,7 +131,7 @@ struct ProfileScreen: View {
                                             // Completed Percentage
                                             RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.green).frame(width: CGFloat(watchingWidth) + CGFloat(completedWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
                                             // Watching percentage
-                                            RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.purple).frame(width: CGFloat( watchingWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                                            RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(Color.purple).frame(width: CGFloat(watchingWidth), height: 10, alignment: .center).padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
                                         
                                         }
                                         Spacer()
@@ -142,7 +150,7 @@ struct ProfileScreen: View {
                 .onAppear(perform: initialize).toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
-                        print("Saved tapped")
+                        print("Notification tapped")
                     } label: {
                         Image(systemName: "bell").foregroundColor(Color.black)
                     }
