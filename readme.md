@@ -207,3 +207,8 @@ Network Requests by Screen:
 **Milestone 3**
 
 <img src= 'https://i.imgur.com/yZTvqg1.gif' width= '250' title= 'Milestone 3'/>
+
+\
+**Milestone 4**
+
+<img src= 'https://i.imgur.com/hWuZC7V.gif' width= '250' title= 'Milestone 4'/>

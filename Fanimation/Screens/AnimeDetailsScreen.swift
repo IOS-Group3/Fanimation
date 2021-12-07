@@ -87,39 +87,19 @@ struct AnimeDetailsScreen: View {
 								} else {
 									Text("Show More")
 									Image(systemName: "arrowtriangle.down.circle.fill")
-								}
+                                }
 							}
-						)
+                        )
 					} else {
 						Text(anime.synopsis ?? "").fontWeight(.semibold)
 					}
 				}
 				.multilineTextAlignment(.leading)
-				.padding(.horizontal)
+				.padding(.horizontal).animation(.easeInOut,value: showMore)
 				
 				
 				Spacer()
-				
-				/*Button (
-					action:{
-						// TODO: add functionality
-						print("edit")
-					}, label: {
-						HStack(alignment: .center) {
-							Spacer()
-							Image(systemName: "highlighter")
-								.resizable()
-								.padding()
-								.foregroundColor(.white)
-								.background(Color.init("blue2"))
-								.frame(width: 75, height: 75)
-								.clipShape(Circle())
-								.shadow(radius: 10)
-								.overlay(Circle().stroke(Color.init("blue1"), lineWidth: 5))
-						}.padding()
-					}
-				)*/
-				
+
 				Spacer()
 			}
 			
@@ -136,40 +116,54 @@ struct AnimeDetailsScreen: View {
 			.navigationBarBackButtonHidden(true)
 			.navigationBarItems(leading: btnBack)
             .overlay(editButton(animeTitle: anime.title, animeId: anime.mal_id))
+            
+            
 	}
 }
 
 struct editButton: View {
     @State var editToggle:Bool = false
+    @State var curr:Settings
+    @State var isLoading:Bool = false
     let  animeTitle:String
     let  animeId:Int
     
     init(animeTitle:String, animeId:Int) {
         self.animeTitle = animeTitle
         self.animeId = animeId
+        self.curr = Settings(animeId: animeId, animeTitle: animeTitle)
     }
     
     var body: some View {
         VStack {
             Spacer()
             if editToggle {
-                
-                //EditListScreen(editToggle: self.$editToggle, currSettings: animeTitle:animeTitle,animeId: animeId).padding(.top, 50).transition(.move(edge: .bottom))
-                
+                EditListScreen(editToggle: self.$editToggle, currSettings:self.$curr).padding(.top, 50).transition(.move(edge: .bottom))
             }
             Spacer()
             HStack {
                     Spacer()
-                
                     Button(action: {
-                        editToggle.toggle()
+                        //check
+                        isLoading.toggle() //Loading activator while settings are fetched
+                        let firebase = FirebaseRequests()
+                        firebase.queryAnime(animeId: animeId, animeTitle:animeTitle) { (result) in
+                            curr = result
+                            editToggle.toggle()
+                            isLoading.toggle()
+                        }
                     }) {
-                        Image(systemName: "highlighter")
-                            .font(.system(size: 30))
-                            .frame(width: 75, height: 75)
-                            .foregroundColor(Color.white)
-                        .background(AngularGradient(gradient: Gradient(colors: [Color(red: 0.26, green: 0.632, blue: 0.981),Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.26, green: 0.632, blue: 0.981)]), center: .center).opacity(0.92)).clipShape(Circle())            }
-
+                        if isLoading {
+                            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color.white)).scaleEffect(2)
+                                .frame(width: 75, height: 75).background(AngularGradient(gradient: Gradient(colors: [Color(red: 0.26, green: 0.632, blue: 0.981),Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.26, green: 0.632, blue: 0.981)]), center: .center).opacity(0.92)).clipShape(Circle())
+                        }else {
+                            Image(systemName: "highlighter").font(.system(size: 30))
+                                .frame(width: 75, height: 75)
+                                .foregroundColor(Color.white)
+                            .background(AngularGradient(gradient: Gradient(colors: [Color(red: 0.26, green: 0.632, blue: 0.981),Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.26, green: 0.632, blue: 0.981)]), center: .center).opacity(0.92)).clipShape(Circle())
+                        }
+                        
+                    }
             }.padding(.trailing, 20.0)
         }.background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle)
     }
@@ -228,41 +222,3 @@ struct AnimeDetailsScreen_Previews: PreviewProvider {
 		AnimeDetailsScreen(anime: Anime())
 	}
 }
-
-/*
- struct editButton: View {
-     @State var editToggle:Bool = false
-     let  animeTitle:String
-     let  animeId:Int
-     
-     init(animeTitle:String, animeId:Int) {
-         self.animeTitle = animeTitle
-         self.animeId = animeId
-     }
-     
-     var body: some View {
-         VStack {
-             Spacer()
-             if editToggle {
-                 
-                 //EditListScreen(editToggle: self.$editToggle, currSettings: <#Binding<Settings>#>,animeTitle:animeTitle,animeId: animeId).padding(.top, 50).transition(.move(edge: .bottom))
-                 
-             }
-             Spacer()
-             HStack {
-                     Spacer()
-                 
-                     Button(action: {
-                         editToggle.toggle()
-                     }) {
-                         Image(systemName: "square.and.pencil")
-                             .font(.system(size: 25))
-                             .frame(width: 60, height: 60)
-                             .foregroundColor(Color.white)
-                         .background(AngularGradient(gradient: Gradient(colors: [Color(red: 0.26, green: 0.632, blue: 0.981),Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.278, green: 0.701, blue: 0.98), Color(red: 0.26, green: 0.632, blue: 0.981)]), center: .center).opacity(0.92)).clipShape(Circle())            }
-
-             }.padding(.trailing, 20.0)
-         }.background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle)
-     }
- }
- */

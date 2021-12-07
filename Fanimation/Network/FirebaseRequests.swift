@@ -44,7 +44,7 @@ public class FirebaseRequests {
             print(error.localizedDescription)
         }
     }
-    
+
     func AddToWatching(watching: WatchingList) {
         do {
             try db.collection("Users").document(userEmail!).collection("Watching").document(String(watching.animeId)).setData(from: watching)
@@ -52,7 +52,7 @@ public class FirebaseRequests {
             print(error.localizedDescription)
         }
     }
-    
+
     func AddToCompleted(completed: CompletedList) {
         do {
             try db.collection("Users").document(userEmail!).collection("Completed").document(String(completed.animeId)).setData(from: completed)
@@ -60,9 +60,10 @@ public class FirebaseRequests {
             print(error.localizedDescription)
         }
     }
-    
+
     //Delete the anime from the appropriate list (Watching, Completed only)
     func DeleteAnime(animeId: Int, list: Int) {
+
         if list == 1 {
             db.collection("Users").document(userEmail!).collection("Watching").document(String(animeId)).delete() { err in
                 if let err = err {
@@ -85,8 +86,156 @@ public class FirebaseRequests {
             }
         }
     }
-
-    func queryAnime(animeId:Int, animeTitle:String, pending:[PendingList], watching:[WatchingList], completed:[CompletedList], favorites:[FavoriteList]) -> (Settings) {
+    
+    func queryAnime(animeId:Int, animeTitle:String, completion: @escaping (Settings) -> ()) ->() {
+        let ref = db.collection("Users").document(userEmail!)
+        ref.collection("Watching").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+            if err != nil {
+                
+            }
+            else {
+                if QuerySnapshot!.count > 0 {
+                    let result = Result {
+                        try QuerySnapshot?.documents[0].data(as: WatchingList.self)
+                    }
+                    switch result {
+                        case .success(let watch):
+                            if let watch = watch {
+                                ref.collection("Favorites").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                                    if err != nil {
+                                        
+                                    } else {
+                                        if QuerySnapshot!.count > 0 {
+                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: true, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                            completion(settings)
+                                        }
+                                        else {
+                                            let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: false, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                            completion(settings)
+                                        }
+                                    }
+                                }
+                            }
+                    case .failure(let error): do {
+                            print(error.localizedDescription)
+                    }
+                }
+                } else {
+                    ref.collection("Planning").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                        if err != nil {
+                            
+                        }
+                        else {
+                            if QuerySnapshot!.count > 0 {
+                                let result = Result {
+                                    try QuerySnapshot?.documents[0].data(as: PendingList.self)
+                                }
+                                switch result {
+                                    case .success(let planning):
+                                        if let planning = planning {
+                                            ref.collection("Favorites").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                                                if err != nil {
+                                                    
+                                                } else {
+                                                    if QuerySnapshot!.count > 0 {
+                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, statusList: 2, isFavorited: true)
+                                                        completion(settings)
+                                                    }
+                                                    else {
+                                                        let settings = Settings(animeId: animeId, animeTitle: planning.animeTitle, statusList: 2, isFavorited: false)
+                                                        completion(settings)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                case .failure(let error): do {
+                                        print(error.localizedDescription)
+                                }
+                            }
+                            }
+                            else {
+                                ref.collection("Completed").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                                    if err != nil {
+                                        
+                                    }
+                                    else {
+                                        if QuerySnapshot!.count > 0 {
+                                            let result = Result {
+                                                try QuerySnapshot?.documents[0].data(as: CompletedList.self)
+                                            }
+                                            switch result {
+                                                case .success(let completed):
+                                                    if let completed = completed {
+                                                        ref.collection("Favorites").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                                                            if err != nil {
+                                                                
+                                                            } else {
+                                                                if QuerySnapshot!.count > 0 {
+                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, statusList: 3, isFavorited: true, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
+                                                                    completion(settings)
+                                                                }
+                                                                else {
+                                                                    let settings = Settings(animeId: animeId, animeTitle: completed.animeTitle, statusList: 3, isFavorited: false, scoreButton: completed.score, startDate: completed.startDate, endDate: completed.endDate)
+                                                                    completion(settings)
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                            case .failure(let error): do {
+                                                    print(error.localizedDescription)
+                                            }
+                                        }
+                                        }
+                                        else {
+                                            let settings = Settings(animeId: animeId, animeTitle: animeTitle)
+                                            completion(settings)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /*
+     if err != nil {
+         
+     }
+     else {
+         if QuerySnapshot!.count > 0 {
+             let result = Result {
+                 try QuerySnapshot?.documents[0].data(as: WatchingList.self)
+         }
+         switch result {
+             case .success(let watch):
+                 if let watch = watch {
+                     ref.collection("Favorites").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
+                         if err != nil {
+                             
+                         } else {
+                             if QuerySnapshot!.count > 0 {
+                                 let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: true, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                 completion(settings)
+                             }
+                             else {
+                                 let settings = Settings(animeId: animeId, animeTitle: watch.animeTitle, statusList: 1, isFavorited: false, scoreButton: watch.score, progressButton: watch.progress, startDate: watch.startDate)
+                                 completion(settings)
+                             }
+                         }
+                     }
+                 }
+                 else {
+                         
+                 }
+             case .failure(let error): do {
+                     print(error.localizedDescription)
+             }
+         }
+     }
+     */
+    /*func queryAnime(animeId:Int, animeTitle:String, pending:[PendingList], watching:[WatchingList], completed:[CompletedList], favorites:[FavoriteList]) -> (Settings) {
         var current:Settings?
         
         if watching.contains(where: {$0.animeId == animeId}) {
@@ -140,7 +289,8 @@ public class FirebaseRequests {
         
         return current!
         
-    }
+    }*/
+    
     //Updates the favorites list
     func UpdateFavorites(add:Bool, favorites: FavoriteList) {
         if add {
@@ -159,154 +309,8 @@ public class FirebaseRequests {
         }
     }
     
-    //Snapshot Watching
-    //Snapshot Pending
     
-    //Snapshot Completed
-    
-    //Snapshot Favorites
-    
-    //Retrieves the new users list (tuples)
-    func RetrieveWatching() -> ([WatchingList]) {
-        var leave = 0
-        let ref = db.collection("Users").document(userEmail!)
-        var watchingList:[WatchingList] = []
-        //Watching
-
-        ref.collection("Watching").getDocuments() { (QuerySnapshot, err) in
-            if err != nil {
-                print(err?.localizedDescription)
-            }
-            else {
-                for document in QuerySnapshot!.documents {
-                    
-                        let result = Result {
-                            try document.data(as: WatchingList.self)
-                        }
-                        switch result {
-                            case .success(let watch):
-                                if let watch = watch {
-                                    watchingList.append(watch)
-                                }
-                                else {
-                                    
-                                }
-                            case .failure(let error): do {
-                                print(error.localizedDescription)
-                                              }
-                      }
-                    }
-                }
-            
-                print("\(watchingList) ")
-        }
-            
-         print("End. ")
-            return watchingList
-        
-        
-    }
-    
-    func RetrievePending() -> ([PendingList]) {
-        let ref = db.collection("Users").document(userEmail!)
-        var pendingList:[PendingList] = []
-        
-        //Pending List
-        ref.collection("Planning").getDocuments() { (QuerySnapshot, err) in
-            if err != nil {
-                print(err?.localizedDescription)
-
-            }
-            else {
-                for document in QuerySnapshot!.documents {
-                    let result = Result {
-                        try document.data(as: PendingList.self)
-                    }
-                    switch result {
-                    case .success(let planning):
-                        if let planning = planning {
-                            pendingList.append(planning)
-                        }
-                        else {
-                            
-                        }
-                    case .failure(let error): do {
-                        print(error.localizedDescription)
-                    }
-                }
-                }
-            }
-        }
-        
-        return pendingList
-    }
-    func RetrieveCompleted() -> ([CompletedList]) {
-        let ref = db.collection("Users").document(userEmail!)
-        var completedList:[CompletedList] = []
-        
-        //Completed List
-        ref.collection("Completed").getDocuments() { (QuerySnapshot, err) in
-            if err != nil {
-                print(err?.localizedDescription)
-            }
-            else {
-                for document in QuerySnapshot!.documents {
-                    let result = Result {
-                        try document.data(as: CompletedList.self)
-                    }
-                    switch result {
-                    case .success(let completed):
-                        if let completed = completed {
-                            completedList.append(completed)
-                        }
-                        else {
-                            
-                        }
-                    case .failure(let error): do {
-                        print(error.localizedDescription)
-                    }
-                }
-                }
-            }
-        }
-        
-        return completedList
-    }
-    
-    func RetrieveFavorites() -> ([FavoriteList]) {
-        let ref = db.collection("Users").document(userEmail!)
-        var favoritesList:[FavoriteList]  = []
-        
-        //Favorites List
-        DispatchQueue.main.async {
-            
-            ref.collection("Favorites").getDocuments() { (QuerySnapshot, err) in
-                if err != nil {
-                    
-                }
-                else {
-                    for document in QuerySnapshot!.documents {
-                        let result = Result {
-                            try document.data(as: FavoriteList.self)
-                        }
-                        switch result {
-                            case .success(let favorites):
-                                if let favorites = favorites {
-                                    favoritesList.append(favorites)
-                                }
-                            case .failure(let error): do {
-                                print(error.localizedDescription)
-                            }
-                        }
-                    }
-                }
-                Dispatch.wait()
-            }
-        }
-        
-        return favoritesList
-     }
-    
+    //Retrieves all lists
     func RetrieveLists(watchingList: Binding<[WatchingList]>, pendingList: Binding<[PendingList]>, completedList: Binding<[CompletedList]>, favoritesList:Binding<[FavoriteList]>) -> () {
         let ref = db.collection("Users").document(userEmail!)
         
@@ -418,5 +422,6 @@ public class FirebaseRequests {
                 }
             }
          }
+    
 }
 

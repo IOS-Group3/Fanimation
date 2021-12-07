@@ -15,8 +15,10 @@ struct Settings {
     var isList:Int
     var scoreButton: Int
     var progressButton: Int
+    var startDate: String
+    var endDate: String
     
-    init(animeId:Int, animeTitle:String, statusList:Int, isFavorited:Bool, scoreButton: Int? = -1 , progressButton: Int? = 0) {
+    init(animeId:Int, animeTitle:String, statusList:Int, isFavorited:Bool, scoreButton: Int? = -1 , progressButton: Int? = 0, startDate: String? = "", endDate: String? = "") {
         self.animeId = animeId
         self.animeTitle = animeTitle
         self.statusList = statusList
@@ -24,6 +26,8 @@ struct Settings {
         self.isList = statusList
         self.scoreButton = scoreButton!
         self.progressButton = progressButton!
+        self.startDate = startDate!
+        self.endDate = endDate!
     }
     
     //Anime is not on any list
@@ -35,5 +39,7 @@ struct Settings {
         self.isList = -1
         self.scoreButton = -1
         self.progressButton = 0
+        self.startDate = ""
+        self.endDate = ""
     }    
 }
