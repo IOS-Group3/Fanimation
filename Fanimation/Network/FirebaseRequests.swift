@@ -361,7 +361,21 @@ public class FirebaseRequests {
         }
     }
     
-    
+    func updateProgress(animeId:Int, progress:Int, completion: @escaping (Bool) -> ()) {
+        let ref = db.collection("Users").document(userEmail!)
+        
+        ref.collection("Watching").document(String(animeId)).updateData([
+            "progress": progress]) { err in
+            if let err = err  {
+                print(err.localizedDescription)
+                completion(false)
+            }
+            else {
+                print("Document updated")
+                completion(true)
+            }
+        }
+    }
     //Retrieve Completed
     func fetchCompletedList(completion: @escaping ([CompletedList]) -> ()) {
         let ref = db.collection("Users").document(userEmail!)

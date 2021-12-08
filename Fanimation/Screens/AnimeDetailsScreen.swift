@@ -217,6 +217,7 @@ struct Popularity: View {
 }
 
 
+
 struct AnimeDetailsScreen_Previews: PreviewProvider {
 	static var previews: some View {
 		AnimeDetailsScreen(anime: Anime())
