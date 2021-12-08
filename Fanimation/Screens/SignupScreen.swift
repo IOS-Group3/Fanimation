@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 struct SignupScreen: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 	@State private var email:String = ""
@@ -146,6 +147,7 @@ func checkUsername(username: String, completion: @escaping (Bool) -> ()) -> () {
 }
 func createAccount(email: String, uid: String, username:String) {
 	let db = Firestore.firestore()
+    let defaultImage = "https://firebasestorage.googleapis.com/v0/b/fanimation-a2ee9.appspot.com/o/profileImages%2Fdefault.png?alt=media&token=0173621f-2d11-4f56-9716-b03c65f69b59"
 	var ref: DocumentReference? = nil
 	
     let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -156,7 +158,8 @@ func createAccount(email: String, uid: String, username:String) {
     ref = db.collection("Users").document(email.lowercased())
 	ref?.setData([
         "userID": uid,
-        "username": username
+        "username": username,
+        "profileImage": defaultImage
 	])
     
     //Add Username to list
