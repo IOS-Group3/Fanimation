@@ -82,14 +82,14 @@ struct MyListScreen: View {
 					switch selectedTabIndex {
 
 						case 0:
-                        AnimeList(animelist: WatchToAnime(watchingList: watchingList),list: 1,editToggle: $editToggle, watching: self.$watchingList)
+                        Screens(animelist: WatchToAnime(watchingList: watchingList),list: 1,editToggle: $editToggle, watching: self.$watchingList, pending: self.$pendingList, completed: self.$completedList)
                             .background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle).onAppear(perform: getLists)
 						case 1:
-                        AnimeList(animelist: PendingToAnime(pendingList: pendingList), list: 2, editToggle: $editToggle, watching: self.$watchingList)
+                        Screens(animelist: PendingToAnime(pendingList: pendingList), list: 2, editToggle: $editToggle, watching: self.$watchingList, pending: self.$pendingList, completed: self.$completedList)
                             .background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle)
 						default:
-                        AnimeList(animelist: CompletedToAnime(completedList: completedList), list: 3, editToggle: $editToggle, watching: self.$watchingList)
-                            .background(editToggle ? Color.black.ignoresSafeArea().opacity(0.5): Color.black.ignoresSafeArea().opacity(0)).animation(.easeInOut,value: editToggle)
+                        Screens(animelist: CompletedToAnime(completedList: completedList), list: 3, editToggle: $editToggle, watching: self.$watchingList, pending: self.$pendingList, completed: self.$completedList)
+                            
 							
                     }
 					Spacer()
@@ -98,7 +98,9 @@ struct MyListScreen: View {
                         
 					
 				}.edgesIgnoringSafeArea(.bottom)
-                   
+                    
+                    
+                
             }.onAppear(perform: getUserInfo)
                 .onAppear(perform: getLists)
             
@@ -108,6 +110,39 @@ struct MyListScreen: View {
 	}
 }
 
+struct Screens: View {
+    var animelist : [Anime]
+    let list:Int
+    var editToggle:Binding<Bool>
+    @State var curr:Settings = Settings(animeId: -1, animeTitle: "", imageURL: "")
+    var watching:Binding<[WatchingList]>
+    var pending:Binding<[PendingList]>
+    var completed:Binding<[CompletedList]>
+    
+    init(animelist:[Anime], list:Int, editToggle:Binding<Bool>, watching:Binding<[WatchingList]>, pending:Binding<[PendingList]>, completed:Binding<[CompletedList]>){
+        self.list = list
+        self.editToggle = editToggle
+        self.animelist = animelist
+        self.watching = watching
+        self.pending = pending
+        self.completed = completed
+    }
+    var body: some View {
+        VStack {
+            if(!editToggle.wrappedValue) {
+                AnimeList(animelist: animelist, list: list, editToggle: editToggle, watching: watching, curr: $curr, pending:pending, completed: completed).animation(.easeInOut, value: !editToggle.wrappedValue)
+            }
+            else {
+                ZStack {
+                    Color.black.opacity(0.5).ignoresSafeArea(.all).animation(.easeInOut(duration: 2).delay(1), value:(editToggle.wrappedValue))
+                        
+                }
+            }
+        }.overlay(editView(editToggle: editToggle, curr: $curr))
+            
+        
+    }
+}
 struct User : View {
 	var user: UserModel
 	var body : some View {
@@ -135,19 +170,38 @@ struct AnimeList: View {
     var animelist : [Anime]
     let list:Int
     @State var editToggle:Binding<Bool>
-    @State var curr:Settings = Settings(animeId: -1, animeTitle: "", imageURL: "")
+    var curr:Binding<Settings>
     var watching:Binding<[WatchingList]>
+    var pending:Binding<[PendingList]>
+    var completed:Binding<[CompletedList]>
 	@State var anime = Anime()
 	@State var showDetailView = false
 	let service = APIService()
     
-    init(animelist:[Anime], list:Int, editToggle:Binding<Bool>, watching:Binding<[WatchingList]>){
+    init(animelist:[Anime], list:Int, editToggle:Binding<Bool>, watching:Binding<[WatchingList]>, curr:Binding<Settings>, pending:Binding<[PendingList]>, completed:Binding<[CompletedList]>){
         self.list = list
         self.editToggle = editToggle
         self.animelist = animelist
         self.watching = watching
+        self.pending = pending
+        self.completed = completed
+        self.curr = curr
+        
     }
-     
+    
+    func getLists() {
+        firebase.fetchWatchingList { (result) in
+            watching.wrappedValue = result
+            firebase.fetchPendingList { (pendingResults) in
+                pending.wrappedValue = pendingResults
+                firebase.fetchCompletedList { (completedResults) in
+                    completed.wrappedValue = completedResults
+                }
+            }
+        }
+  
+    }
+
 	func openDetailView(animeID: Int) {
 		let anime_url = URL(string: "https://api.jikan.moe/v3/anime/\(animeID)")
 		service.fetchAnimeTitle(url: anime_url) { result in
@@ -202,7 +256,7 @@ struct AnimeList: View {
 								Spacer()
 								Button(action: {
                                     firebase.queryAnime(animeId: anime.mal_id, animeTitle: anime.title, imageURL: anime.image_url) { (result) in
-                                        curr = result
+                                        curr.wrappedValue = result
                                         editToggle.wrappedValue.toggle()
                                         
                                     }
@@ -252,7 +306,7 @@ struct AnimeList: View {
 					}
 				}
 			}
-        }.overlay(editView(editToggle: editToggle, curr: $curr)).onAppear(perform: MyListScreen().getLists)
+        }.onAppear(perform: getLists)
     }
 }
 
@@ -264,9 +318,9 @@ struct editView: View {
         self.curr = curr
     }
     var body: some View {
-        ZStack() {
-            if (editToggle.wrappedValue == true) {
-                EditListScreen(editToggle: editToggle, currSettings: curr).transition(.move(edge: .bottom)).onDisappear(perform: MyListScreen().getLists)
+        HStack {
+            if(editToggle.wrappedValue) {
+                EditListScreen(editToggle: editToggle, currSettings: curr).transition(.move(edge: .bottom))
             }
         }
     }
