@@ -26,6 +26,7 @@ struct ProfileScreen: View {
     @State var user = UserModel()
     @State var profilePic = "https://firebasestorage.googleapis.com/v0/b/fanimation-a2ee9.appspot.com/o/profileImages%2Fblank.png?alt=media&token=c1a5957e-aa94-4ff8-84df-d298aa2567e9"
     @State var loading = true
+    @State var sideMenu = false
     @State var joinedDate = "2021"
     
     func calculateProgress() {
@@ -64,6 +65,7 @@ struct ProfileScreen: View {
         NavigationView {
             ScrollView {
                 ZStack (alignment: .topLeading){
+                    
                     // Increase height of background by drag amount
                     GeometryReader { g in
                         Image("geo-landscape-valley").resizable().aspectRatio(1, contentMode: .fill)
@@ -145,18 +147,22 @@ struct ProfileScreen: View {
                         }
                         Spacer()
                     }.padding(.top, 120)
+                    if sideMenu {
+                        ProfileSideMenuView(width: UIScreen.main.bounds.width / 2.4, menuOpen: $sideMenu).navigationBarHidden(true).transition(.move(edge: .trailing))
+                    }
                 }
             }.edgesIgnoringSafeArea(.top)
                 .onAppear(perform: initialize).toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         print("Notification tapped")
+                        
                     } label: {
                         Image(systemName: "bell").foregroundColor(Color.black)
                     }
                     
                     Button {
-                        print("Settings tapped")
+                        sideMenu.toggle()
                     } label : {
                         Image(systemName: "gearshape").foregroundColor(Color.black)
                     }
@@ -217,12 +223,7 @@ func uploadProfile(imageData:URL) {
     }
     
 }
-func onLogOut() {
-	if let window = UIApplication.shared.windows.first {
-		window.rootViewController = UIHostingController(rootView: WelcomeScreen())
-		window.makeKeyAndVisible()
-	}
-}
+
 
 func updateUserProfile(photoURL:URL) {
     let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()

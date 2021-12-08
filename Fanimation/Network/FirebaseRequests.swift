@@ -17,10 +17,28 @@ public class FirebaseRequests {
     var ref: DocumentReference? = nil
     let userEmail = Auth.auth().currentUser?.email
     
+    func logOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            onLogOut()
+            
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+            
+        }
+        
+    }
+    
+    func onLogOut() {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: LoginScreen())
+            window.makeKeyAndVisible()
+        }
+    }
     
     // Get User profile information
     func fetchUserProfile(completionHandler: @escaping (UserModel) -> Void) {
-        
         
         db.collection("Users").document(userEmail!).getDocument { (document, error) in
             guard let document = document, document.exists else {

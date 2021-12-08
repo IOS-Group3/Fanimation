@@ -20,83 +20,85 @@ struct LoginScreen: View {
 	}
 	
 	var body: some View {
-		ZStack {
-			Color("light")
-				.ignoresSafeArea()
-			VStack {
-				
-				HStack {
-					Image(systemName: "envelope.fill")
-                    TextField("Email", text: $email).autocapitalization(.none)
-				}
-				.padding(.vertical, 10)
-				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
-				.foregroundColor(Color("dark"))
-				.padding(10)
-				
-				HStack {
-					Image(systemName: "lock.fill")
-					if showPassword {
-                        TextField("Password", text: $password).autocapitalization(.none)
-						Image(systemName: "eye.fill").onTapGesture {
-							showPassword.toggle()
-						}
-						
-					} else {
-						SecureField("Password", text: $password)
-						Image(systemName: "eye.slash.fill").onTapGesture {
-							showPassword.toggle()
-						}
-					}
-				}
-				.padding(.vertical, 10)
-				.overlay(Rectangle().frame(height: 2).padding(.top, 35))
-				.foregroundColor(Color("dark"))
-				.padding(10)
-				
-				HStack {
-					Spacer()
-					NavigationLink(destination: ForgotPasswordScreen()) {
-						Text("Forgot Password?")
-					}.padding(.trailing)
-				}
-				Spacer()
-                //Error message displayed
-                Text(errorMessage).foregroundColor(.red)
-				Button(action: {
-					//Signs in user
-					Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {  authResult, error in
-						if (error == nil) {
-							//Sends user to the main screen
-							goMain()
-						} else { //Error logging in
-							errorMessage = error!.localizedDescription
-						}
-						
-					}
-				}) {
-					
-					Text("Login")
-						.padding()
-						.frame(width: 300, height: 50)
-						.background(Color("blue1"))
-						.cornerRadius(20)
-						.foregroundColor(Color("light"))
-				}
-				
-				
-				Spacer()
-				HStack{
-					Text("Don't have an account?").foregroundColor(Color("dark"))
-					NavigationLink(destination: SignupScreen()) {
-						Text("Signup now")
-					}
-				}
-				Spacer()
-				Spacer()
-			}.padding()
-				.navigationBarTitle(Text("Login"), displayMode: .large)
-		}
+        NavigationView {
+            ZStack {
+                Color("light")
+                    .ignoresSafeArea()
+                VStack {
+                    
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                        TextField("Email", text: $email).autocapitalization(.none)
+                    }
+                    .padding(.vertical, 10)
+                    .overlay(Rectangle().frame(height: 2).padding(.top, 35))
+                    .foregroundColor(Color("dark"))
+                    .padding(10)
+                    
+                    HStack {
+                        Image(systemName: "lock.fill")
+                        if showPassword {
+                            TextField("Password", text: $password).autocapitalization(.none)
+                            Image(systemName: "eye.fill").onTapGesture {
+                                showPassword.toggle()
+                            }
+                            
+                        } else {
+                            SecureField("Password", text: $password)
+                            Image(systemName: "eye.slash.fill").onTapGesture {
+                                showPassword.toggle()
+                            }
+                        }
+                    }
+                    .padding(.vertical, 10)
+                    .overlay(Rectangle().frame(height: 2).padding(.top, 35))
+                    .foregroundColor(Color("dark"))
+                    .padding(10)
+                    
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: ForgotPasswordScreen()) {
+                            Text("Forgot Password?")
+                        }.padding(.trailing)
+                    }
+                    Spacer()
+                    //Error message displayed
+                    Text(errorMessage).foregroundColor(.red)
+                    Button(action: {
+                        //Signs in user
+                        Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {  authResult, error in
+                            if (error == nil) {
+                                //Sends user to the main screen
+                                goMain()
+                            } else { //Error logging in
+                                errorMessage = error!.localizedDescription
+                            }
+                            
+                        }
+                    }) {
+                        
+                        Text("Login")
+                            .padding()
+                            .frame(width: 300, height: 50)
+                            .background(Color("blue1"))
+                            .cornerRadius(20)
+                            .foregroundColor(Color("light"))
+                    }
+                    
+                    
+                    Spacer()
+                    HStack{
+                        Text("Don't have an account?").foregroundColor(Color("dark"))
+                        NavigationLink(destination: SignupScreen()) {
+                            Text("Signup now")
+                        }
+                    }
+                    Spacer()
+                    Spacer()
+                }.padding()
+                    .navigationBarTitle(Text("Login"), displayMode: .large)
+            }
+        }
 	}
 }
 func goMain() {
