@@ -1,3 +1,10 @@
+/*
+	Group 5: Fanimation
+	Member 1: Paola Jose Lora
+	Member 2: Recleph Mere
+	Member 3: Ahmed Elshetany
+*/
+
 //
 //  ImageLoader.swift
 //  Fanimation
@@ -5,6 +12,7 @@
 //  Created by Ahmed  Elshetany  on 11/17/21.
 //  Last Modified: 11/20/21 by Recleph Mere
 //
+
 import Foundation
 import SwiftUI
 import UIKit

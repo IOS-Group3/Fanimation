@@ -1,3 +1,11 @@
+
+/*
+ Group 5: Fanimation
+ Member 1: Paola Jose Lora
+ Member 2: Recleph Mere
+ Member 3: Ahmed Elshetany
+ */
+
 //
 //  SignupScreen.swift
 //  Fanimation
