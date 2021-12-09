@@ -112,6 +112,80 @@ public class FirebaseRequests {
         }
     }
     
+    func getRatings(animeId:Int, completion: @escaping (Double, Int) -> ()) {
+        getRatingsCompleted(animeId: animeId) { (avgComp, peopleComp) in
+            self.getRatingsWatching(animeId: animeId) { (avgWatch, peopleWatch)  in
+                
+                let totalRating = avgComp + avgWatch
+                let totalPeople = peopleComp + peopleWatch
+                
+                //Adding totalRating and totalPeople to avoid dividing by 0
+                let average = totalRating + totalPeople > 0 ? Double(totalRating)/Double(totalPeople) : 0
+                completion(average, totalPeople)
+            }
+        }
+    }
+    
+    func getRatingsCompleted(animeId: Int, completion: @escaping (Int, Int) -> ()) {
+        var avg:Int = 0
+        var people:Int = 0
+        db.collectionGroup("Completed").whereField("animeId", isEqualTo: animeId).whereField("score", isGreaterThan: -1).getDocuments() { (querySnapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            else {
+                people = querySnapshot?.count ?? 0
+                for document in querySnapshot!.documents {
+                    let result = Result {
+                        try document.data(as: Ratings.self)
+                    }
+                    switch result {
+                        case .success(let rating):
+                        if let rating = rating {
+                            avg += rating.score
+                        }
+                        case .failure(let error): do {
+                            print(error.localizedDescription)
+                            print(avg)
+                            completion(avg, people)
+                        }
+                    }
+                }
+                completion(avg, people)
+        }
+    }
+    }
+    
+    func getRatingsWatching(animeId:Int, completion: @escaping (Int, Int) -> ()) {
+        var avg:Int = 0
+        var people:Int = 0
+        db.collectionGroup("Watching").whereField("animeId", isEqualTo: animeId).whereField("score", isGreaterThan: -1).getDocuments() { (querySnapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            else {
+                people = querySnapshot?.count ?? 0
+                for document in querySnapshot!.documents {
+                    print("\(document)")
+                    let result = Result {
+                        try document.data(as: Ratings.self)
+                    }
+                    switch result {
+                        case .success(let rating):
+                        if let rating = rating {
+                            avg += rating.score
+                        }
+                        case .failure(let error): do {
+                            print(error.localizedDescription)
+                            completion(avg, people)
+                        }
+                    }
+                }
+                completion(avg, people)
+        }
+    }
+    }
+    
     func queryAnime(animeId:Int, animeTitle:String, imageURL: String, completion: @escaping (Settings) -> ()) ->() {
         let ref = db.collection("Users").document(userEmail!)
         ref.collection("Watching").whereField("animeId", isEqualTo: animeId).getDocuments() { (QuerySnapshot, err) in
