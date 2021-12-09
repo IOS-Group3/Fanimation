@@ -13,10 +13,11 @@ struct MenuItem: Identifiable {
     let icon: Image
     let action: () -> Void
 }
-
 struct ProfileSideMenuView: View {
     let width: CGFloat
     var menuOpen: Binding<Bool>
+    @State var showConfirmation = false
+    
     var body: some View {
         ZStack {
             GeometryReader { reader in
@@ -30,42 +31,65 @@ struct ProfileSideMenuView: View {
                 }
             HStack {
                 Spacer()
-                MenuContent().frame(width: self.width).offset(x: menuOpen.wrappedValue ? 0 : -width)
+                MenuContent(binds: $showConfirmation).frame(width: self.width).offset(x: menuOpen.wrappedValue ? 0 : -width)
                     .animation(.default)
             }
            
             
             
+        }.actionSheet(isPresented: $showConfirmation) {
+            ActionSheet(
+                title: Text("Update Avatar"),
+                message: Text("Select upload option"),
+                buttons: [
+                    .cancel(),
+                    .default(
+                        Text("Choose a Photo"),
+                        action: openImagePicker
+                    ),
+                    .default(
+                        Text("Take a Photo"),
+                        action: openImagePicker
+                    ),
+                ]
+            )
         }
     }
 }
 
 struct MenuContent: View {
-    let menuItems:[MenuItem] = [
-        MenuItem(
-            text: "Update Avatar",
-            icon: Image(systemName: "person.circle.fill"),
-            action: updateAvatar
-        ),
-        
-        MenuItem(
-            text: "Change Password",
-            icon: Image(systemName: "lock.fill"),
-            action: changePassword
-        ),
-        
-        MenuItem(
-            text: "Change Privacy",
-            icon: Image(systemName: "eye.slash.fill"),
-            action: changePrivacy
-        ),
-        
-        MenuItem(
-            text: "Logout",
-            icon: Image(systemName: "arrow.right.square"),
-            action: logOut)
+    var menuItems:[MenuItem] = []
     
-    ]
+    
+    init(binds: Binding<Bool>) {
+        self.menuItems = [
+            MenuItem(
+                text: "Update Avatar",
+                icon: Image(systemName: "person.circle.fill")) {
+                
+                    updateAvatar(binds: binds)
+                }
+            ,
+            
+            MenuItem(
+                text: "Change Password",
+                icon: Image(systemName: "lock.fill"),
+                action: changePassword
+            ),
+            
+            MenuItem(
+                text: "Change Privacy",
+                icon: Image(systemName: "eye.slash.fill"),
+                action: changePrivacy
+            ),
+            
+            MenuItem(
+                text: "Logout",
+                icon: Image(systemName: "arrow.right.square"),
+                action: logOut)
+            ]
+        
+    }
     
     var body: some View {
         ZStack {
@@ -90,9 +114,11 @@ struct MenuContent: View {
     }
 }
 
-func updateAvatar() -> Void {
+
+func updateAvatar(binds: Binding<Bool>) -> Void {
+    binds.wrappedValue.toggle()
     print("Updating Avatar")
-    
+ 
 }
 
 func changePrivacy() -> Void {
@@ -101,6 +127,14 @@ func changePrivacy() -> Void {
 
 func changePassword() -> Void {
     print("Changing Password")
+}
+
+func openImagePicker() -> Void {
+    
+}
+
+func openCamera() -> Void {
+    
 }
 
 func logOut() -> Void {
