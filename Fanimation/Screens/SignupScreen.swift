@@ -160,6 +160,7 @@ func createAccount(email: String, uid: String, username:String) {
 	
     let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
     changeRequest?.displayName = username
+    changeRequest?.photoURL = URL(string: defaultImage)
     changeRequest?.commitChanges()
     
 	//Add user

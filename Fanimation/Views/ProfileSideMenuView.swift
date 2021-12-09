@@ -25,6 +25,33 @@ struct ProfileSideMenuView: View {
     let width: CGFloat
     var menuOpen: Binding<Bool>
     @State var showConfirmation = false
+    @State var showImagePicker = false
+    @State var pickedImage: Image?
+    @State var imageData: Data = Data()
+    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    func openImagePicker() -> Void {
+        
+        self.sourceType = .photoLibrary
+        showImagePicker.toggle()
+        
+    }
+
+    func openCamera() -> Void {
+        self.sourceType = .camera
+        showImagePicker.toggle()
+        
+    }
+    
+    func uploadImage() {
+        guard pickedImage != nil else {
+            return
+        }
+        let firebaseService = FirebaseRequests()
+        firebaseService.updateAvatar(imageData: self.imageData)
+        
+        
+    }
     
     var body: some View {
         ZStack {
@@ -57,10 +84,13 @@ struct ProfileSideMenuView: View {
                     ),
                     .default(
                         Text("Take a Photo"),
-                        action: openImagePicker
+                        action: openCamera
                     ),
                 ]
             )
+        }.sheet(isPresented: $showImagePicker, onDismiss: uploadImage) {
+            ImagePicker(pickedImage: self.$pickedImage, showImagePicker: self.$showImagePicker, imageData: self.$imageData)
+            
         }
     }
 }
@@ -137,13 +167,6 @@ func changePassword() -> Void {
     print("Changing Password")
 }
 
-func openImagePicker() -> Void {
-    
-}
-
-func openCamera() -> Void {
-    
-}
 
 func logOut() -> Void {
     let firebaseService = FirebaseRequests()

@@ -16,6 +16,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseStorage
 import grpc
 import SwiftUI
 
@@ -23,6 +24,83 @@ public class FirebaseRequests {
     let db = Firestore.firestore()
     var ref: DocumentReference? = nil
     let userEmail = Auth.auth().currentUser?.email
+    
+    func updateAvatar(imageData:URL) {
+        let user = Auth.auth().currentUser
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference().child("Users/\(user?.uid)")
+        
+        storageRef.putFile(from: imageData, metadata: nil) { storageData, error in
+            if (error != nil) {
+                print(error?.localizedDescription)
+            }
+            else {
+                storageRef.downloadURL { url, error in
+                    if error != nil {
+                        return
+                    }
+                    let urlString = url?.absoluteString
+                }
+            }
+        }
+        
+    }
+    
+    // Function overload for uploading using Data instead of a URL ref
+    func updateAvatar(imageData:Data, completed: @escaping() -> Void) {
+        let user = Auth.auth().currentUser
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference().child("Users/\(user?.uid)")
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        storageRef.putData(imageData, metadata: metadata) { storageData, error in
+            if (error != nil) {
+                print(error?.localizedDescription)
+            }
+            else {
+                storageRef.downloadURL { url, error in
+                    if error != nil {
+                        return
+                    }
+                    if let urlString = url?.absoluteString {
+                        self.updateUserProfile(photoURL: url!){
+                            print("Finished Updating Account")
+                            completed()
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
+
+    func updateUserProfile(photoURL:URL, completed: @escaping () -> Void ) {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.photoURL = photoURL
+        changeRequest?.commitChanges { error in
+            if error != nil {
+                print("\(error?.localizedDescription)")
+                return
+            }
+            else {
+                let ref = self.db.collection("Users").document(self.userEmail!)
+                ref.updateData([
+                    "profileImage": photoURL.absoluteString
+                ])
+                print("Update successful!")
+                completed()
+            }
+        }
+    }
     
     func logOut() {
         let firebaseAuth = Auth.auth()
