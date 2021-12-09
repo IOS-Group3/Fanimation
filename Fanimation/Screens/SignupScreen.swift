@@ -24,6 +24,7 @@ struct SignupScreen: View {
     @State private var username:String = ""
 	@State var showPassword:Bool = false
 	@State var errormessage:String = ""
+    @State var loading:Bool = false
 	
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
@@ -77,8 +78,10 @@ struct SignupScreen: View {
                 //Error message
                 Text(errormessage).foregroundColor(.red)
 				Button(action: {
+                    loading.toggle()
                     if username.count > 3 {
                          checkUsername(username: username) { result in
+                             loading.toggle()
                             if result == true {
                                 errormessage = ""
                                 Auth.auth().createUser(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {authResult, error in
@@ -104,15 +107,23 @@ struct SignupScreen: View {
                         errormessage = "Username must be greater than 3 characters."
                     }
 				}) {
+                    if loading {
+                        ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color.white)).scaleEffect(1).padding()
+                            .frame(width: 300, height: 50)
+                            .background(Color("blue1"))
+                            .cornerRadius(20)
+                            .foregroundColor(Color("light"))
+                    }else {
+                        Text("Signup")
+                            .padding()
+                            .frame(width: 300, height: 50)
+                            .background(Color("blue1"))
+                            .cornerRadius(20)
+                            .foregroundColor(Color("light"))
+                    }
 					
-					Text("Signup")
-						.padding()
-						.frame(width: 300, height: 50)
-						.background(Color("blue1"))
-						.cornerRadius(20)
-						.foregroundColor(Color("light"))
 					
-				}
+                }
 				
 				
 				Spacer()
@@ -127,7 +138,7 @@ struct SignupScreen: View {
 				Spacer()
 			}.padding()
 				.navigationBarTitle(Text("Signup"), displayMode: .large)
-		}
+        }.disabled(loading)
 	}
 }
 

@@ -21,7 +21,7 @@ struct LoginScreen: View {
 	@State private var password:String = ""
 	@State var showPassword:Bool = false
 	@State var errorMessage:String = ""
-	
+    @State var loading:Bool = false
 	init() {
 		UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:UIColor(named: "blue1") ?? UIColor.blue, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
 	}
@@ -72,24 +72,37 @@ struct LoginScreen: View {
                     //Error message displayed
                     Text(errorMessage).foregroundColor(.red)
                     Button(action: {
+                        loading.toggle()
                         //Signs in user
                         Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) {  authResult, error in
                             if (error == nil) {
                                 //Sends user to the main screen
+                                loading.toggle()
                                 goMain()
                             } else { //Error logging in
                                 errorMessage = error!.localizedDescription
+                                loading.toggle()
                             }
                             
                         }
                     }) {
                         
-                        Text("Login")
-                            .padding()
-                            .frame(width: 300, height: 50)
-                            .background(Color("blue1"))
-                            .cornerRadius(20)
-                            .foregroundColor(Color("light"))
+                        if loading {
+                            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color.white)).scaleEffect(1).padding()
+                                .frame(width: 300, height: 50)
+                                .background(Color("blue1"))
+                                .cornerRadius(20)
+                                .foregroundColor(Color("light"))
+                        }
+                        else {
+                            Text("Login")
+                                .padding()
+                                .frame(width: 300, height: 50)
+                                .background(Color("blue1"))
+                                .cornerRadius(20)
+                                .foregroundColor(Color("light"))
+                        }
+                        
                     }
                     
                     
@@ -105,7 +118,7 @@ struct LoginScreen: View {
                 }.padding()
                     .navigationBarTitle(Text("Login"), displayMode: .large)
             }
-        }
+        }.disabled(loading)
 	}
 }
 func goMain() {
