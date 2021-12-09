@@ -52,12 +52,11 @@ struct AnimeDetailsScreen: View {
 					).frame(width: 150, height: 250).cornerRadius(15)
 					Spacer()
 					VStack {
-						Text(anime.title)
-							.fontWeight(.bold)
+                        Text(anime.title).font(Font.custom("Poppins-Bold", size: 25))
 							.font(.title)
 							.foregroundColor(.white)
 						Spacer()
-						Rating(rating: anime.avgRating ?? 0)
+                        Rating(rating: 0.0, animeId: anime.mal_id)
 						Spacer()
 						Rank(rank: anime.rank ?? 0)
 						Spacer()
@@ -68,14 +67,12 @@ struct AnimeDetailsScreen: View {
 					Spacer()
 				}
 				.padding()
-				Text("Description")
-					.font(.title)
-					.fontWeight(.bold)
+                Text("Description").font(Font.custom("Poppins-Bold", size: 25))
 					.multilineTextAlignment(.leading)
 					.padding(.top)
 				
 				VStack{
-					if anime.synopsis!.count > 400 {
+					if (anime.synopsis ?? "").count > 400 {
 						if showMore {
 							Text(anime.synopsis ?? "").fontWeight(.semibold)
 							
@@ -98,7 +95,7 @@ struct AnimeDetailsScreen: View {
 							}
                         )
 					} else {
-						Text(anime.synopsis ?? "").fontWeight(.semibold)
+                        Text(anime.synopsis ?? "").font(Font.custom("Poppins-SemiBold", size: 20))
 					}
 				}
 				.multilineTextAlignment(.leading)
@@ -177,18 +174,34 @@ struct editButton: View {
 }
 
 struct Rating: View {
-	var rating: Double
+    @State var rating: Double = 0.0
+    @State var people: Int = 0
+    var animeId:Int
+    
+    func getRatings()  {
+        FirebaseRequests().getRatings(animeId: animeId) { (avg,people)  in
+            rating = avg
+            self.people = people
+        }
+    }
+    
 	var body: some View {
 		HStack {
 			Image(systemName: "star")
 				.resizable()
 				.foregroundColor(.white)
-				.frame(width: 25, height: 25, alignment: .center)
-			Text(String(format: "%.2f", rating))
-				.fontWeight(.semibold)
-				.font(.title2)
-				.foregroundColor(.white)
-		}
+                .frame(width: 25, height: 25, alignment: .center).padding(.bottom, 20)
+            VStack {
+                Text(String(format: "%.2f", rating))
+                    .fontWeight(.semibold)
+                    .font(.title2)
+                    .foregroundColor(.white)
+                Text(people != 1 ? "(\(people) users)" : "(\(people) user)" )
+                    .foregroundColor(.white).font(Font.custom("Poppins-Medium", size: 12))
+            }
+			
+            
+        }.onAppear(perform: getRatings)
 	}
 }
 struct Rank: View {

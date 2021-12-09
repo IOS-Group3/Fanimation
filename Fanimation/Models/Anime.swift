@@ -22,6 +22,13 @@ struct Discover: Codable {
     var results: [Anime]
 }
 
+struct Ratings: Codable {
+    var animeId: Int
+    var animeTitle: String
+    var imageURL: String
+    var score: Int
+}
+
 struct Anime: Codable {
     var mal_id: Int
     var title: String
